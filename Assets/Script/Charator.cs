@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -12,6 +13,12 @@ public class Charator : MonoBehaviour
    [SerializeField]private float groundDistance;
 
   [SerializeField] private float movingSpeed;
+
+  [SerializeField] private float jumpForce;
+
+   private int maxJumpNum =1;
+
+   private int avaliableJump;
 
    private int facingDir = 1;
 
@@ -30,13 +37,20 @@ public class Charator : MonoBehaviour
      isGround =Physics2D.Raycast(transform.position,Vector2.down,groundDistance,whatIsGround);
         
        xInput = Input.GetAxisRaw("Horizontal");
-       if(isGround)
-    {
        ChractorMove();
 
-    }
+       if(isGround)
+       avaliableJump = maxJumpNum;
+
+       if(Input.GetButtonDown("Jump")&&avaliableJump>0)
+       {
+       ChractorJump();
+        avaliableJump--;
+       }
 
        
+
+
     }
 
 
@@ -44,7 +58,12 @@ public class Charator : MonoBehaviour
     {
        rb.velocity = new Vector2(xInput*movingSpeed,rb.velocity.y);
     }
+    
 
+    private void ChractorJump()
+    {
+       rb.velocity  = new Vector2(rb.velocity.x,jumpForce);
+    }
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position,transform.position+ Vector3.down*groundDistance);
