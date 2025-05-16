@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 371338053}
   - component: {fileID: 371338055}
   - component: {fileID: 371338054}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: damageCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,12 +678,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637178463}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.069, y: -0.84, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.347719, y: -1.5799999, z: 0}
+  m_LocalScale: {x: 12.6922, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1748381291}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &866695655
 PrefabInstance:
@@ -827,7 +827,7 @@ GameObject:
   - component: {fileID: 1252963386}
   - component: {fileID: 1252963385}
   - component: {fileID: 1252963384}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,7 +992,7 @@ GameObject:
   - component: {fileID: 1419905955}
   - component: {fileID: 1419905954}
   - component: {fileID: 1419905953}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Charactor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1387,7 +1387,8 @@ MonoBehaviour:
   movePoint:
   - {fileID: 637178464}
   - {fileID: 2024833919}
-  moveSpeed: 0
+  moveSpeed: 1
+  originPoint: {fileID: 0}
 --- !u!61 &1748381289
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1497,9 +1498,7 @@ Transform:
   m_LocalPosition: {x: -13.47, y: 4.94, z: 0}
   m_LocalScale: {x: 12.6922, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 637178464}
-  - {fileID: 2024833919}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1987591630
@@ -1570,12 +1569,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024833918}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.153, y: 1.63, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.6154852, y: 11.42, z: 0}
+  m_LocalScale: {x: 12.6922, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1748381291}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8283563245621524994
 PrefabInstance:
@@ -1645,6 +1644,8 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 336552280}
+  - {fileID: 2024833919}
+  - {fileID: 637178464}
   - {fileID: 1748381291}
   - {fileID: 1419905957}
   - {fileID: 8283563245621524994}
