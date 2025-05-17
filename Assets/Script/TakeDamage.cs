@@ -6,7 +6,7 @@ public class TakeDamage : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<Charator>())
-        Debug.Log("玩家受伤！");
+        if (collision.GetComponent<Charator>())
+            GameManager.Instance.HealthLess();
     }
 }
