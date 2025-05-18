@@ -16,8 +16,7 @@ public class Charator : MonoBehaviour
   [SerializeField] private float movingSpeed;
 
   [SerializeField] private float jumpForce;
-   [SerializeField] private float downSpeed;
-   private int maxJumpNum = 1;
+  [SerializeField] private int maxJumpNum = 0;
    private int avaliableJump;
    private int facingDir = 1;
    
@@ -26,10 +25,16 @@ public class Charator : MonoBehaviour
    [SerializeField] private LayerMask whatIsGround;
 
    [Header("boom")]
+   [SerializeField] private float thrownSpeed;
 
    [SerializeField] private GameObject boomPrefab;
+   [SerializeField] private Vector2 thrownDir;
 #endregion
    private float xInput;
+   private float yInput;
+
+   private MousePositon mousePositon;
+   
 
 
     void Start()
@@ -41,6 +46,7 @@ public class Charator : MonoBehaviour
    void Update()
    {
          xInput = Input.GetAxisRaw("Horizontal");
+      //  Vector2 mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
       if (isGround)
       {
@@ -49,7 +55,7 @@ public class Charator : MonoBehaviour
       else
       {
          if (xInput != 0)
-         ChractorMove();
+            ChractorMove();
       }
 
       if (isGround)
@@ -61,7 +67,7 @@ public class Charator : MonoBehaviour
          avaliableJump--;
       }
 if (Input.GetKeyDown(KeyCode.Q))
-      ThrownBoom();
+      ThrownBoom(MousePositon.instance.mousePos);
 
        
 
@@ -82,11 +88,12 @@ if (Input.GetKeyDown(KeyCode.Q))
        rb.velocity  = new Vector2(rb.velocity.x,jumpForce);
     }
 
-   private void ThrownBoom() // 扔炸弹
+   private void ThrownBoom(Vector2 _mousePositon) // 扔炸弹
    {
       GameObject boom = Instantiate(boomPrefab, transform.position, Quaternion.identity);
       Rigidbody2D boomRb = boom.GetComponent<Rigidbody2D>();
-      boomRb.velocity = new Vector2(0, downSpeed);
+      Vector2 thrownDir = _mousePositon - rb.position;
+         boomRb.velocity = new Vector2( thrownDir.normalized.x* thrownSpeed, thrownDir.normalized.y * thrownSpeed);
    }
       
     
