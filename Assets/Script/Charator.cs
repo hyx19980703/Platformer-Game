@@ -33,7 +33,6 @@ public class Charator : MonoBehaviour
    private float xInput;
    private float yInput;
 
-   private MousePositon mousePositon;
    
 
 
