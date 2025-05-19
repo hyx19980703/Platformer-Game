@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    private State currentState;
+    public State currentState;
     public void StateInitialized(State _currentState)
     {
         currentState = _currentState;
+        currentState.Entry();
     }
 
     public void StateChange(State _currentState)

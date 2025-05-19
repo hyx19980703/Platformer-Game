@@ -24,7 +24,6 @@ public class MousePositon : MonoBehaviour
     {
          mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
          mousePos.z = 0;
-        Debug.Log("鼠标当前位置" + mousePos);
 
 
     }
