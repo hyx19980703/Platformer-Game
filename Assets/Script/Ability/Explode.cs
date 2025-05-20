@@ -50,6 +50,8 @@ public class Explode : MonoBehaviour
                 hitRb.velocity = direction * explodeForce;
             }
         }
+
+        transform.localScale=new Vector3(5,5,5);
         Destroy(gameObject, 0.1f);
     }
 
