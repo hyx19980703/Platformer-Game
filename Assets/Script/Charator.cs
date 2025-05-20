@@ -88,7 +88,7 @@ public class Charator : MonoBehaviour
          ChractorJump();
          avaliableJump--;
       }
-      if (Input.GetKeyDown(KeyCode.Q))
+      if (Input.GetKeyDown(KeyCode.Q))//只触发一次
          ThrownBoom(MousePositon.instance.mousePos);
 
       Flip();
@@ -116,14 +116,16 @@ public class Charator : MonoBehaviour
       rb.velocity = new Vector2(rb.velocity.x, jumpForce);
    }
 
-   private void ThrownBoom(Vector2 _mousePositon) // 扔炸弹
-   {
-      GameObject boom = Instantiate(boomPrefab, transform.position, Quaternion.identity);
-      Rigidbody2D boomRb = boom.GetComponent<Rigidbody2D>();
-      Vector2 thrownDir = _mousePositon - rb.position;
-      boomRb.velocity = new Vector2(thrownDir.normalized.x * thrownSpeed, thrownDir.normalized.y * thrownSpeed);
-   }
-
+private void ThrownBoom(Vector2 _mousePositon)
+{
+    GameObject boom = Instantiate(boomPrefab, transform.position, Quaternion.identity);
+    Rigidbody2D boomRb = boom.GetComponent<Rigidbody2D>();
+    Explode explode = boom.GetComponent<Explode>();
+    
+    // 直接给炸弹初速度，不在这里检测地面
+    Vector2 thrownDir = (_mousePositon - rb.position).normalized;
+    boomRb.velocity = thrownDir * thrownSpeed;
+}
 
    void OnDrawGizmos() // 地面检测调试
    {

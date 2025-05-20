@@ -3,16 +3,38 @@ using UnityEngine;
 public class Explode : MonoBehaviour
 {
     [Header("explode")]
-    [SerializeField] private float explodeForce ;    // 冲击波力度
-    [SerializeField] private float explodeRadius ;    // 爆炸范围
-    [SerializeField] private float detonationDistance = 0.1f; // 触发爆炸距离
-    [SerializeField] private LayerMask ground;            // 地面/墙壁层
-    [SerializeField] private float upwardModifier = 0.3f; // 垂直方向修正
+    [SerializeField] private float explodeForce;    
+    [SerializeField] private float explodeRadius;    
+    [SerializeField] private float detonationDistance = 0.1f;
+    [SerializeField] private LayerMask ground;            
+    [SerializeField] private float upwardModifier = 0.3f;
+    
+    private Rigidbody2D rb;
+    private bool hasExploded = false; // 防止重复爆炸
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Update()
     {
-        if (CheckNearGroundOrWall())
-            Explosion();
+        if (!hasExploded && CheckNearGroundOrWall())
+        {
+            StopBoomMovement(); // 先停止炸弹移动
+            Explosion();        // 再触发爆炸
+            hasExploded = true; // 标记已爆炸，避免重复执行
+        }
+    }
+
+    void StopBoomMovement()
+    {
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;   // 清除速度
+            rb.gravityScale = 0f;         // 取消重力影响
+            rb.isKinematic = true;        // 改为不受物理影响
+        }
     }
 
     void Explosion()
@@ -20,34 +42,24 @@ public class Explode : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explodeRadius);
         foreach (Collider2D hit in colliders)
         {
-            Rigidbody2D rb = hit.GetComponent<Rigidbody2D>();
-            if (rb != null && hit.CompareTag("Player"))
+            Rigidbody2D hitRb = hit.GetComponent<Rigidbody2D>();
+            if (hitRb != null && hit.CompareTag("Player"))
             {
-                // 计算从炸弹指向玩家的方向
-                Vector2 direction = (Vector2)(hit.transform.position - transform.position);
-
-                // 添加可控的垂直分量（保留原始方向）
-                direction = (direction.normalized + Vector2.up * upwardModifier).normalized;
-                Debug.DrawRay(transform.position, direction * 5, Color.green, 1f);
-                //rb.AddForce(direction * explodeForce , ForceMode2D.Impulse);  addforce会导致下落的时候会有一个抵消的效果，可能直接获得一个速度会更好？
-                rb.velocity = new Vector2(direction.x * explodeForce, direction.y * explodeForce);
+                Vector2 direction = (hit.transform.position - transform.position).normalized;
+                direction = (direction + Vector2.up * upwardModifier).normalized;
+                hitRb.velocity = direction * explodeForce;
             }
         }
         Destroy(gameObject, 0.1f);
     }
 
-    bool CheckNearGroundOrWall()
-    {
-        return Physics2D.OverlapCircle(transform.position, detonationDistance, ground);
-    }
+    public bool CheckNearGroundOrWall() => Physics2D.OverlapCircle(transform.position, detonationDistance, ground);
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detonationDistance); // 触发范围
+        Gizmos.DrawWireSphere(transform.position, detonationDistance);
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, explodeRadius);      // 爆炸范围
+        Gizmos.DrawWireSphere(transform.position, explodeRadius);
     }
-    
-    
 }
