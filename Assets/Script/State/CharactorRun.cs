@@ -11,9 +11,12 @@ public class CharactorRun : State
     public override void Update()
     {
         base.Update();
+        if(charator.isGround)
         charator.ChractorMove();
+        if (!charator.isGround)
+            charator.stateMachine.StateChange(charator.airState);
         if (charator.xInput == 0)
-            charator.stateMachine.StateChange(charator.IdleState);
+                charator.stateMachine.StateChange(charator.IdleState);
     }
 
     public override void Entry()

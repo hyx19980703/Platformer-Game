@@ -1375,13 +1375,17 @@ MonoBehaviour:
   movingSpeed: 5
   jumpForce: 20
   maxJumpNum: 1
-  groundDistance: 0.83
+  airMoveFactor: 15
+  groundDistance: 1.53
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   thrownSpeed: 50
   boomPrefab: {fileID: 1136917519224260489, guid: c5818148a07abbc478657e47d1346b8c, type: 3}
   thrownDir: {x: 0, y: 0}
+  xInput: 0
+  yInput: 0
+  isFacingRight: 1
 --- !u!212 &1419905956
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1481,8 +1485,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25817835}
-  m_Size: {x: 1, y: 1.5852034}
+  m_Offset: {x: 0, y: -0.20323658}
+  m_Size: {x: 1, y: 1.9440818}
   m_Direction: 0
 --- !u!95 &1419905959
 Animator:

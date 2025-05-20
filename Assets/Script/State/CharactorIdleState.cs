@@ -12,11 +12,15 @@ public class CharactorIdleState : State
     public override void Update()
     {
         base.Update();
-        Debug.Log("闲置状态!");
         if (charator.isGround && charator.xInput != 0)
         {
-            Debug.Log("转换状态");
             charator.stateMachine.StateChange(charator.runState);
+            //ChractorMove();
+        }
+
+                if (!charator.isGround)
+        {
+            charator.stateMachine.StateChange(charator.airState);
             //ChractorMove();
         }
     }
