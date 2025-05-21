@@ -38,6 +38,9 @@ public class Charator : MonoBehaviour
    [SerializeField] private GameObject boomPrefab;
    [SerializeField] private Vector2 thrownDir;
 
+   [SerializeField] private float boomCoolDownDuration;
+   [SerializeField] private float CoolDownTimer;
+
    #endregion
    public float xInput;
    public float yInput;
@@ -64,7 +67,7 @@ public class Charator : MonoBehaviour
    void Start()
    {
       rb = GetComponent<Rigidbody2D>();
-      anim = GetComponent<Animator>();
+      anim = GetComponentInChildren<Animator>();
       stateMachine.StateInitialized(IdleState);
 
    }
@@ -72,7 +75,7 @@ public class Charator : MonoBehaviour
 
    void Update()
    {
-
+      CoolDownTimer -= Time.deltaTime;
 
       stateMachine.currentState.Update();
       xInput = Input.GetAxisRaw("Horizontal");
@@ -88,8 +91,13 @@ public class Charator : MonoBehaviour
          ChractorJump();
          avaliableJump--;
       }
-      if (Input.GetKeyDown(KeyCode.Q))//只触发一次
+      if (Input.GetKeyDown(KeyCode.Q) && CoolDownTimer < 0)//
+      {
          ThrownBoom(MousePositon.instance.mousePos);
+         CoolDownTimer = boomCoolDownDuration;
+      }
+
+      Debug.Log("炸弹数量" + PrefabList.prefabList.GetInstanceCount());
 
       Flip();
 
@@ -118,9 +126,11 @@ public class Charator : MonoBehaviour
 
 private void ThrownBoom(Vector2 _mousePositon)
 {
-    GameObject boom = Instantiate(boomPrefab, transform.position, Quaternion.identity);
+    GameObject boom = PrefabList.prefabList.getInstance();
+      boom.transform.position = transform.position;
     Rigidbody2D boomRb = boom.GetComponent<Rigidbody2D>();
-    Explode explode = boom.GetComponent<Explode>();
+    
+    //Explode explode = boom.GetComponent<Explode>();
     
     // 直接给炸弹初速度，不在这里检测地面
     Vector2 thrownDir = (_mousePositon - rb.position).normalized;

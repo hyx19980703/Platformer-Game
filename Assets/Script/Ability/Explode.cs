@@ -24,6 +24,7 @@ public class Explode : MonoBehaviour
             StopBoomMovement(); // 先停止炸弹移动
             Explosion();        // 再触发爆炸
             hasExploded = true; // 标记已爆炸，避免重复执行
+            PrefabList.prefabList.RetrunObject(gameObject);
         }
     }
 
@@ -52,7 +53,7 @@ public class Explode : MonoBehaviour
         }
 
         transform.localScale=new Vector3(5,5,5);
-        Destroy(gameObject, 0.1f);
+        
     }
 
     public bool CheckNearGroundOrWall() => Physics2D.OverlapCircle(transform.position, detonationDistance, ground);
