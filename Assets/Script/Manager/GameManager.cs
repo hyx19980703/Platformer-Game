@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,12 +11,21 @@ public class GameManager : MonoBehaviour
 
     public Vector2 lastPosition;
 
+    [SerializeField] private Transform deathLine;
+    [SerializeField] private Transform charator;
+
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
         charactorHealth = 3;
 
+    }
+
+    void Update()
+    {
+        if (charator.position.y < deathLine.position.y) //玩家死亡位置检测
+            RespwanPlayer();
     }
 
     public void AddSource(int value)
@@ -38,6 +48,12 @@ public class GameManager : MonoBehaviour
     public void RespwanPlayer()
     {
         GameObject.FindWithTag("Player").transform.position = lastPosition;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(deathLine.position, deathLine.position+Vector3.right*100);
     }
 
 }
