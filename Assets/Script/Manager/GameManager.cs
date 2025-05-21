@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     int currentScore = 0;
     int charactorHealth;
 
+    public Vector2 lastPosition;
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -21,11 +23,21 @@ public class GameManager : MonoBehaviour
         currentScore += value;
         UIManager.instance.UpdateScore(currentScore);
     }
-    
-        public void  HealthLess()
+
+    public void HealthLess()
     {
-        charactorHealth --;
+        charactorHealth--;
         UIManager.instance.UpdateHealth(charactorHealth);
+    }
+
+    public void SetCheckPoint(Vector2 _lastPosition)
+    {
+        lastPosition = _lastPosition;
+    }
+
+    public void RespwanPlayer()
+    {
+        GameObject.FindWithTag("Player").transform.position = lastPosition;
     }
 
 }
