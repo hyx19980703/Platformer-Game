@@ -5,7 +5,7 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
     private bool isActive;  //激活检查点
-    private Sprite activePoint;
+    [SerializeField] private Sprite activePoint;
     private SpriteRenderer spriteRenderer;
 
     void Awake()
