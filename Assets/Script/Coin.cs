@@ -15,4 +15,9 @@ public class Coin : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    void EatCoin()//test method
+    {
+
+    }
+   
 }
