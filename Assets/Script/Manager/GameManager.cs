@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public Vector2 lastPosition;
 
+    public int crrentLevel;
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -30,9 +32,10 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateHealth(charactorHealth);
     }
 
-    public void SetCheckPoint(Vector2 _lastPosition)
+    public void SetCheckPoint(Vector2 _lastPosition, int _currentLevel)
     {
         lastPosition = _lastPosition;
+        crrentLevel = _currentLevel;
     }
 
     public void RespwanPlayer()
