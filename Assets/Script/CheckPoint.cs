@@ -15,17 +15,17 @@ public class CheckPoint : MonoBehaviour
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        activePoint = GetComponentInChildren<Sprite>();
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (isActive == false && collision.CompareTag("Player"))
         {
 
-            GameManager.Instance.SetCheckPoint(transform.position,currenLevel);
+            GameManager.Instance.SetCheckPoint(transform.position, currenLevel);
 
             isActive = true;
             spriteRenderer.sprite = activePoint;
+            SaveSystem.SaveGame(currenLevel, collision.transform.position);
             
         }
     }
