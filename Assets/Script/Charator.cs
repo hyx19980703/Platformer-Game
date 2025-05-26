@@ -40,6 +40,7 @@ public class Charator : MonoBehaviour
 
    [SerializeField] private float boomCoolDownDuration;
    [SerializeField] private float CoolDownTimer;
+   [SerializeField] private Transform GoundDeteced;
 
    #endregion
    public float xInput;
@@ -105,7 +106,7 @@ public class Charator : MonoBehaviour
 
 
    }
-   public bool isGround => Physics2D.Raycast(transform.position, Vector2.down, groundDistance, whatIsGround);  // 地面检测
+   public bool isGround => Physics2D.Raycast(GoundDeteced.position, Vector2.down, groundDistance, whatIsGround);  // 地面检测
 
 
 
@@ -114,32 +115,33 @@ public class Charator : MonoBehaviour
       rb.velocity = new Vector2(xInput * movingSpeed, rb.velocity.y);
    }
 
-    public void AirMove()
-    {
-      rb.velocity = new Vector2(rb.velocity.x + airMoveFactor*xInput*Time.deltaTime , rb.velocity.y);
-    }
+   public void AirMove()
+   {
+      rb.velocity = new Vector2(rb.velocity.x + airMoveFactor * xInput * Time.deltaTime, rb.velocity.y);
+   }
 
-    private void ChractorJump() // 跳跃
+   private void ChractorJump() // 跳跃
    {
       rb.velocity = new Vector2(rb.velocity.x, jumpForce);
    }
 
-private void ThrownBoom(Vector2 _mousePositon)
-{
-    GameObject boom = PrefabList.prefabList.getInstance();
+   private void ThrownBoom(Vector2 _mousePositon)
+   {
+      GameObject boom = PrefabList.prefabList.getInstance();
       boom.transform.position = transform.position;
-    Rigidbody2D boomRb = boom.GetComponent<Rigidbody2D>();
-    
-    //Explode explode = boom.GetComponent<Explode>();
-    
-    // 直接给炸弹初速度，不在这里检测地面
-    Vector2 thrownDir = (_mousePositon - rb.position).normalized;
-    boomRb.velocity = thrownDir * thrownSpeed;
-}
+      Debug.Log("炸弹发射位置" + transform.position);
+      Rigidbody2D boomRb = boom.GetComponent<Rigidbody2D>();
+
+      //Explode explode = boom.GetComponent<Explode>();
+
+      // 直接给炸弹初速度，不在这里检测地面
+      Vector2 thrownDir = (_mousePositon - rb.position).normalized;
+      boomRb.velocity = thrownDir * thrownSpeed;
+   }
 
    void OnDrawGizmos() // 地面检测调试
    {
-      Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundDistance);
+      Gizmos.DrawLine(GoundDeteced.position, GoundDeteced.position + Vector3.down * groundDistance);
    }
 
    void Flip() //翻转函数
@@ -151,9 +153,15 @@ private void ThrownBoom(Vector2 _mousePositon)
          isFacingRight = true;
       }
       if (xInput < 0 && isFacingRight)
-         { facingDir = facingDir * -1;
-            transform.Rotate(0, 180, 0);
-            isFacingRight = false;
-         }
+      {
+         facingDir = facingDir * -1;
+         transform.Rotate(0, 180, 0);
+         isFacingRight = false;
+      }
    }
+
+   // public void SetVectorZero()
+   // {
+   //    rb.velocity = new Vector2(0, 0);
+   // }
 }
