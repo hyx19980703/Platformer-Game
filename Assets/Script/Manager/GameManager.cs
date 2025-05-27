@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
        // charator.stateMachine.StateChange(charator.respwanState);
         GameObject.FindWithTag("Player").transform.position = lastPosition;
         charator.GetComponent<Charator>().enabled = true;
-        charator.stateMachine.StateChange(charator.IdleState);
         charator.rb.simulated = true;
         
     }
