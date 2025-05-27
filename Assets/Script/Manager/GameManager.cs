@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public int crrentLevel;
 
     [SerializeField] private Transform deathLine;
-    [SerializeField] private Transform charator;
+    [SerializeField] private Charator charator;
 
 
     void Awake()
@@ -28,8 +28,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (charator.position.y < deathLine.position.y) //玩家死亡位置检测
-            RespwanPlayer();
+        if (charator.transform.position.y < deathLine.position.y) //玩家死亡位置检测
+            StartCoroutine("RespwanPlayer");
+            //RespwanPlayer();
     }
 
     public void AddSource(int value)
@@ -50,9 +51,18 @@ public class GameManager : MonoBehaviour
         crrentLevel = _currentLevel;
     }
 
-    public void RespwanPlayer()
+    IEnumerator RespwanPlayer()
     {
+        charator.rb.simulated = false;
+        charator.stateMachine.StateChange(charator.deathState);
+        charator.GetComponent<Charator>().enabled = false;
+        yield return new WaitForSeconds(1f);
+       // charator.stateMachine.StateChange(charator.respwanState);
         GameObject.FindWithTag("Player").transform.position = lastPosition;
+        charator.GetComponent<Charator>().enabled = true;
+        charator.stateMachine.StateChange(charator.IdleState);
+        charator.rb.simulated = true;
+        
     }
 
     void OnDrawGizmos()

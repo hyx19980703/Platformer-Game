@@ -7,7 +7,7 @@ public class PrefabList : MonoBehaviour
 {
    [SerializeField] private GameObject preFab;
     private List<GameObject> listOfpreFab = new List<GameObject>();
-
+    [SerializeField]private int maxNum;
     public static PrefabList prefabList;
 
     void Awake()
@@ -15,6 +15,12 @@ public class PrefabList : MonoBehaviour
         if (prefabList == null)
             prefabList = this;
         else Destroy(gameObject);
+    }
+
+    void Update()
+    {
+        if (listOfpreFab.Count == maxNum)
+            RetrunObject(listOfpreFab[0]);
     }
 
     public GameObject getInstance()

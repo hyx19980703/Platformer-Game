@@ -53,6 +53,10 @@ public class Charator : MonoBehaviour
    public CharactorRun runState { get; private set; }
 
    public CharactorAirState airState { get; private set; }
+
+   public CharactorDeathState deathState { get; private set; }
+
+   public CharactorRespwanState respwanState { get; private set; }
    #endregion
 
    void Awake()
@@ -62,6 +66,8 @@ public class Charator : MonoBehaviour
       IdleState = new CharactorIdleState(this, "Idle");
       runState = new CharactorRun(this, "Run");
       airState = new CharactorAirState(this, "Air");
+      deathState = new CharactorDeathState(this, "Die");
+      respwanState = new CharactorRespwanState(this, "Respawn");
    }
 
 
@@ -97,8 +103,6 @@ public class Charator : MonoBehaviour
          ThrownBoom(MousePositon.instance.mousePos);
          CoolDownTimer = boomCoolDownDuration;
       }
-
-      Debug.Log("炸弹数量" + PrefabList.prefabList.GetInstanceCount());
 
       Flip();
 
@@ -160,8 +164,4 @@ public class Charator : MonoBehaviour
       }
    }
 
-   // public void SetVectorZero()
-   // {
-   //    rb.velocity = new Vector2(0, 0);
-   // }
 }
