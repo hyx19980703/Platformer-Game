@@ -16,7 +16,7 @@ public class CharactorRun : State
         if (!charator.isGround)
             charator.stateMachine.StateChange(charator.airState);
         if (charator.xInput == 0)
-                charator.stateMachine.StateChange(charator.IdleState);
+            charator.stateMachine.StateChange(charator.IdleState);
     }
 
     public override void Entry()

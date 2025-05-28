@@ -15,11 +15,12 @@ public class GameManager : MonoBehaviour
     public int crrentLevel;
 
     [SerializeField] private Transform deathLine;
-    [SerializeField] private Charator charator;
+    [SerializeField] private Charator charator;  // todo 移除charator，不在这里获取charator
 
 
     void Awake()
     {
+       // charator = GameObject.FindWithTag("player").GetComponent<Charator>();
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
         charactorHealth = 3;
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateScore(currentScore);
     }
 
-    public void HealthLess()
+    public void HealthLess()   //todo： 掉血功能拆分
     {
         charactorHealth--;
         UIManager.instance.UpdateHealth(charactorHealth);
@@ -51,20 +52,17 @@ public class GameManager : MonoBehaviour
         crrentLevel = _currentLevel;
     }
 
-    IEnumerator RespwanPlayer()
-    {
-        charator.rb.simulated = false;
-        charator.stateMachine.StateChange(charator.deathState);
-        charator.GetComponent<Charator>().enabled = false;
-        yield return new WaitForSeconds(1f);
-       // charator.stateMachine.StateChange(charator.respwanState);
-        GameObject.FindWithTag("Player").transform.position = lastPosition;
-        charator.GetComponent<Charator>().enabled = true;
-        charator.rb.simulated = true;
+    IEnumerator RespwanPlayer()  // todo： 重生功能拆分
+    { 
+        charator.rb.simulated = false; //禁用物理模拟
+        charator.stateMachine.StateChange(charator.deathState); //进入死亡状态
+        yield return new WaitForSeconds(1f); //1s后玩家回归正常位置
+        GameObject.FindWithTag("Player").transform.position = lastPosition; //玩家恢复正常位置
+        charator.rb.simulated = true; //恢复物理模拟
         
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmos()   //绘制死亡线位置 todo：整合到重生功能里
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(deathLine.position, deathLine.position+Vector3.right*100);

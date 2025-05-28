@@ -23,6 +23,6 @@ public class CharactorDeathState : State
     public override void Update()
     {
         base.Update();
-     //   charator.rb.velocity = new Vector2(0, 0);
+        Input.ResetInputAxes(); //禁用输入，效果等同于玩家无法移动
     }
 }
