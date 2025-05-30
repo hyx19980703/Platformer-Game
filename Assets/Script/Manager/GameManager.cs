@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
 
     public int crrentLevel;
 
-    [SerializeField] private Transform deathLine;
-    [SerializeField] private Charator charator;  // todo 移除charator，不在这里获取charator
+    public Transform deathLine;
+    [SerializeField] private Charator charator;  
 
 
     void Awake()
@@ -29,9 +29,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (charator.transform.position.y < deathLine.position.y) //玩家死亡位置检测
-            StartCoroutine("RespwanPlayer");
-            //RespwanPlayer();
+
     }
 
     public void AddSource(int value)
@@ -52,15 +50,7 @@ public class GameManager : MonoBehaviour
         crrentLevel = _currentLevel;
     }
 
-    IEnumerator RespwanPlayer()  // todo： 重生功能拆分
-    { 
-        charator.rb.simulated = false; //禁用物理模拟
-        charator.stateMachine.StateChange(charator.deathState); //进入死亡状态
-        yield return new WaitForSeconds(1f); //1s后玩家回归正常位置
-        GameObject.FindWithTag("Player").transform.position = lastPosition; //玩家恢复正常位置
-        charator.rb.simulated = true; //恢复物理模拟
-        
-    }
+
 
     void OnDrawGizmos()   //绘制死亡线位置 todo：整合到重生功能里
     {

@@ -22,6 +22,6 @@ public class CharactorRespwanState : State
     public override void Update()
     {
         base.Update();
-            Input.ResetInputAxes(); //禁用输入，效果等同于玩家无法移动
+        Input.ResetInputAxes(); //禁用输入，效果等同于玩家无法移动
     }
 }

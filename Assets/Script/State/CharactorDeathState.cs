@@ -13,11 +13,16 @@ public class CharactorDeathState : State
     public override void Entry()
     {
         base.Entry();
+        Debug.Log("进入死亡状态");
+              charator.rb.simulated = false; //禁用物理模拟
     }
 
     public override void Exit()
     {
         base.Exit();
+        GameObject.FindWithTag("Player").transform.position = GameManager.Instance.lastPosition; //玩家恢复正常位置
+        Debug.Log("回复活点");
+        charator.rb.simulated = true; //恢复物理模拟 
     }
 
     public override void Update()

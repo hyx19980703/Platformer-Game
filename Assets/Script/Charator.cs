@@ -5,7 +5,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class Charator : MonoBehaviour
+public class Charator : MonoBehaviour, Ideath
 {
    public Rigidbody2D rb;
    public Animator anim;
@@ -59,6 +59,8 @@ public class Charator : MonoBehaviour
    public CharactorRespwanState respwanState { get; private set; }
    #endregion
 
+   private float ReturnTime = 1f;
+   private float ReturnTimer;
    void Awake()
    {
 
@@ -83,6 +85,7 @@ public class Charator : MonoBehaviour
    void Update()
    {
       CoolDownTimer -= Time.deltaTime;
+      ReturnTimer -= Time.deltaTime;
 
       stateMachine.currentState.Update();
       xInput = Input.GetAxisRaw("Horizontal");
@@ -105,9 +108,14 @@ public class Charator : MonoBehaviour
       }
 
       Flip();
-
-
-
+       /*如果不加时间，重生函数会因为玩家一直处于死亡线的位置而重复调用，转变状态时启用回复位置函数，最终玩家在死亡动画播放完成前就回到起始点 
+       还有一种做法是把回复位置函数放在respwan状态的entry函数
+       */
+      if (isUnderDeathLine() && ReturnTimer < 0)
+      {
+         ReturnTimer = ReturnTime;
+         RespwanPlayer();
+      }
 
    }
    public bool isGround => Physics2D.Raycast(GoundDeteced.position, Vector2.down, groundDistance, whatIsGround);  // 地面检测
@@ -164,4 +172,22 @@ public class Charator : MonoBehaviour
       }
    }
 
+
+   public  void RespwanPlayer()  // 
+    { 
+  
+        this.stateMachine.StateChange(this.deathState); //进入死亡状态
+
+           
+    }
+    
+
+
+  public bool isUnderDeathLine()
+   {
+      if (this.transform.position.y <= GameManager.Instance.deathLine.position.y)  
+         return true;
+      else
+         return false;
+   }
 }

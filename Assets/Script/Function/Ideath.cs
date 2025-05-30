@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface Ideath
 {
-    public void GotoDie();
-    public void ReSpawn();
+    void RespwanPlayer();//复活玩家
+    bool isUnderDeathLine();//检测是否在死亡线下
 }
