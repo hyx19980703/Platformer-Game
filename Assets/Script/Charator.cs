@@ -31,7 +31,7 @@ public class Charator : MonoBehaviour, Ideath
    [Header("collision")]
    [SerializeField] private float groundDistance;
    [SerializeField] private LayerMask whatIsGround;
-
+   [SerializeField] private LayerMask whatIsGround2; 
    [Header("boom")]
    [SerializeField] private float thrownSpeed;
 
@@ -93,7 +93,7 @@ public class Charator : MonoBehaviour, Ideath
 
 
 
-      if (isGround)
+      if (isGround())
          avaliableJump = maxJumpNum;
 
       if (Input.GetButtonDown("Jump") && avaliableJump > 0)
@@ -118,7 +118,12 @@ public class Charator : MonoBehaviour, Ideath
       }
 
    }
-   public bool isGround => Physics2D.Raycast(GoundDeteced.position, Vector2.down, groundDistance, whatIsGround);  // 地面检测
+   public bool isGround()
+   {
+      if (Physics2D.Raycast(GoundDeteced.position, Vector2.down, groundDistance, whatIsGround) || Physics2D.Raycast(GoundDeteced.position, Vector2.down, groundDistance, whatIsGround2))
+         return true;  // 地面检测
+      else return false;
+   }
 
 
 
@@ -143,9 +148,7 @@ public class Charator : MonoBehaviour, Ideath
       boom.transform.position = transform.position;
       Debug.Log("炸弹发射位置" + transform.position);
       Rigidbody2D boomRb = boom.GetComponent<Rigidbody2D>();
-
       //Explode explode = boom.GetComponent<Explode>();
-
       // 直接给炸弹初速度，不在这里检测地面
       Vector2 thrownDir = (_mousePositon - rb.position).normalized;
       boomRb.velocity = thrownDir * thrownSpeed;
@@ -175,13 +178,8 @@ public class Charator : MonoBehaviour, Ideath
 
    public  void RespwanPlayer()  // 
     { 
-  
         this.stateMachine.StateChange(this.deathState); //进入死亡状态
-
-           
     }
-    
-
 
   public bool isUnderDeathLine()
    {
