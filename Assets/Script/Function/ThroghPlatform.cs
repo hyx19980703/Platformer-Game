@@ -4,28 +4,45 @@ using UnityEngine;
 
 public class ThroghPlatform : MonoBehaviour
 {
-    [SerializeField]private GameObject charator;
+    [SerializeField] private GameObject charator;
+    [SerializeField] private PlatformEffector2D effector;
     //private LayerMask onewayPlatform;
 
     private float passingDuration = 0.5f;
+
+    private float passingTimer;
 
    // private Collider collider;
 
     private bool isPassingThrogh;
     void Start()
     {
-        charator = GameObject.FindWithTag("Player");
-        Debug.Log("玩家层级 " + charator.layer);
-        Debug.Log("穿越平台层级 " + LayerMask.NameToLayer("OneWayPlatform"));
+        effector = GetComponent<PlatformEffector2D>();
         
     }
-
+    /*
+    简易方案 platformeffector unity自带的单向平台组件，可以通过角度和范围角来判断可穿越区域 
+    rotationloffset=0为从正下方穿越
+     ratationloffest=180为从正上方穿越
+    */
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-            StartCoroutine("PassingThrough");
+        passingTimer -= Time.deltaTime;
+        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && passingTimer < 0)
+        {
+            // StartCoroutine("PassingThrough");
+            if (Input.GetKey(KeyCode.Space))
+            {
+                effector.rotationalOffset = 180;
+                passingTimer = passingDuration;
+
+            }
+        }
+        else if (passingTimer < 0)
+            effector.rotationalOffset = 0;
     }
 
+ // 备用方案 层级碰撞
     IEnumerator PassingThrough()
     {
         if (isPassingThrogh == true) yield break;
