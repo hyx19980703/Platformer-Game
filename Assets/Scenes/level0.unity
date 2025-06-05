@@ -2508,6 +2508,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 737428515d58c4e4b9066312aae5ed3f, type: 3}
+--- !u!4 &1681379738 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3880096485905115517, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
+  m_PrefabInstance: {fileID: 1797695807}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1683427495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,6 +2668,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1087453400718976085, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
+      propertyPath: GroundDeteced
+      value: 
+      objectReference: {fileID: 1681379738}
+    - target: {fileID: 1087453400718976085, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
+      propertyPath: groundDistance
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4085926929481416862, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.43
