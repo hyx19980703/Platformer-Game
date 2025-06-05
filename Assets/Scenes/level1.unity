@@ -6610,7 +6610,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Charactor
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 273955403867549794, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6882,6 +6883,8 @@ GameObject:
   - component: {fileID: 2138268512}
   - component: {fileID: 2138268511}
   - component: {fileID: 2138268510}
+  - component: {fileID: 2138268513}
+  - component: {fileID: 2138268514}
   m_Layer: 10
   m_Name: onewayplatfrm
   m_TagString: Untagged
@@ -6934,7 +6937,7 @@ TilemapCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
@@ -7235,6 +7238,39 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!251 &2138268513
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138268508}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
+--- !u!114 &2138268514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138268508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4503ab633e633c04eafe9bc10834a946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charator: {fileID: 0}
+  effector: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
