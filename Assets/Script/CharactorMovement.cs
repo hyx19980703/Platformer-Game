@@ -4,80 +4,65 @@ using UnityEngine;
 
 public class CharactorMovement : MonoBehaviour
 {
-    #region ×é¼ş»ñÈ¡
+    #region ç»„ä»¶è·å–
     public Rigidbody2D rb;
+    private IDetection groundDetected;
     #endregion
-    #region ÒÆ¶¯²ÎÊı
+    #region ç§»åŠ¨å‚æ•°
     [Header("moveInfo")]
-    private float movingSpeed;
-    private float jumpForce;
-    public int maxJumpNum;
-    private float airMoveFactor;
-    public int availableJump;
+    [SerializeField] private float movingSpeed;
+    [SerializeField] private float jumpForce;
+    [SerializeField] public int maxJumpNum;
+    [SerializeField] private float airMoveFactor;
+    [HideInInspector] public int availableJump;
     #endregion
-    #region µØÃæÅö×²¼ì²â²ÎÊı(ÔİÎ´Ê¹ÓÃ£¬ÒÑ×¢ÊÍ)
-    //[Header("collision")]
-    //public Transform GroundDeteced;
-    //public float groundDistance;
-    //public LayerMask whatIsGround;
+    #region åˆå§‹åŒ–æ–¹æ³•(æš‚æœªä½¿ç”¨ï¼Œå·²æ³¨é‡Š)
+    //public void Initialize()
+    //{
+    //    rb = GetComponent<Rigidbody2D>();
+    //    this.movingSpeed = 8f;
+    //    this.jumpForce = 10f;
+    //    this.maxJumpNum = 1;
+    //    this.airMoveFactor = 10f;
+    //    availableJump = maxJumpNum;
+    //}
     #endregion
-    #region ³õÊ¼»¯·½·¨
-    public void Initialize()
+    #region ç§»åŠ¨æ–¹æ³•
+    public void Move(float xInput,Charator charator)
     {
-        rb = GetComponent<Rigidbody2D>();
-        this.movingSpeed = 8f;
-        this.jumpForce = 10f;
-        this.maxJumpNum = 1;
-        this.airMoveFactor = 10f;
-        availableJump = maxJumpNum;
-    }
-    #endregion
-    #region ÒÆ¶¯·½·¨
-    public void Move(float xInput)
-    {
-        //if (IsGrounded())
-        //{
+        if (charator.isGrounded)
+        {
             rb.velocity = new Vector2(xInput * movingSpeed, rb.velocity.y);
-        //}
-        //else
-        //{
-        //    AirMove(xInput);
-        //}
+        }
+        if (!charator.isGrounded)
+        {
+            AirMove(xInput);
+        }
     }
     #endregion
-    #region ÌøÔ¾·½·¨
+    #region è·³è·ƒæ–¹æ³•
     public void Jump()
     {
-        //if (IsGrounded() || availableJump >= 0)
-        //{
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-
-            //if (!IsGrounded())
-            //{
-            //    availableJump--;
-            //}
-        //}
     }
     #endregion
-    #region ¿ÕÖĞÒÆ¶¯·½·¨
+    #region ç©ºä¸­ç§»åŠ¨æ–¹æ³•
     public void AirMove(float xInput)
     {
         rb.velocity = new Vector2(rb.velocity.x + airMoveFactor * xInput * Time.deltaTime, rb.velocity.y);
     }
     #endregion
-    #region µØÃæÅö×²¼ì²â·½·¨(ÔİÎ´Ê¹ÓÃ£¬ÒÑ×¢ÊÍ)
-    //public bool IsGrounded()
-    //{
-    //    bool isGrounded = Physics2D.Raycast(GroundDeteced.position, Vector2.down, groundDistance, whatIsGround);
-    //    if (isGrounded)
-    //    {
-    //        availableJump = maxJumpNum;
-    //    }
-    //    return isGrounded;
-    //}
-    #endregion
-    //void Awake()
-    //{
-    //    GroundDeteced = GetComponent<Transform>();
-    //}
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        groundDetected = GetComponent<GroundD>();
+    }
+    private void Update()
+    {
+        if (Input.GetButtonDown("Jump")&& availableJump > 0 )
+        {
+            Jump();
+            availableJump--;
+        }
+    }
 }

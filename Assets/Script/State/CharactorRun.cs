@@ -14,7 +14,7 @@ public class CharactorRun : State
         if (charator.isGrounded)
             Debug.Log("ÒÆ¶¯×´Ì¬");
             //charator.ChractorMove();
-            charator.movement.Move(charator.xInput);
+            charator.movement.Move(charator.xInput,charator);
         if (!charator.isGrounded)
             charator.stateMachine.StateChange(charator.airState);
         if (charator.xInput == 0)
