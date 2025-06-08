@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateScore(currentScore);
     }
 
-    public void HealthLess()   //todo： 掉血功能拆分
+    public void HealthLess()   
     {
         charactorHealth--;
         UIManager.instance.UpdateHealth(charactorHealth);

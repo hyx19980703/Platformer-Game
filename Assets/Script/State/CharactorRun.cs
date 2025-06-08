@@ -11,11 +11,11 @@ public class CharactorRun : State
     public override void Update()
     {
         base.Update();
-        if (charator.isGrounded)
-            Debug.Log("�ƶ�״̬");
+        if (charator.isGround)
+            Debug.Log("�ƶ�״̬");
             //charator.ChractorMove();
             charator.movement.Move(charator.xInput,charator);
-        if (!charator.isGrounded)
+        if (!charator.isGround)
             charator.stateMachine.StateChange(charator.airState);
         if (charator.xInput == 0)
             charator.stateMachine.StateChange(charator.IdleState);

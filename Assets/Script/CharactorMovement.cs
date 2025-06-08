@@ -30,11 +30,11 @@ public class CharactorMovement : MonoBehaviour
     #region 移动方法
     public void Move(float xInput,Charator charator)
     {
-        if (charator.isGrounded)
+        if (charator.isGround)
         {
             rb.velocity = new Vector2(xInput * movingSpeed, rb.velocity.y);
         }
-        if (!charator.isGrounded)
+        if (!charator.isGround)
         {
             AirMove(xInput);
         }
