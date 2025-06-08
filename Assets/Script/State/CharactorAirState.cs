@@ -23,10 +23,11 @@ public class CharactorAirState : State
     {
         base.Update();
         Debug.Log("空中状态");
-        charator.AirMove();
-        charator.anim.SetFloat("yVector", charator.rb.velocity.y);
+        //charator.AirMove();
+        charator.movement.Move(charator.xInput,charator);
+        charator.anim.SetFloat("yVector", charator.movement.rb.velocity.y);
 
-        if (charator.isGround)
+        if (charator.isGrounded)
             charator.stateMachine.StateChange(charator.IdleState);
     }
 }

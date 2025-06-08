@@ -7,40 +7,40 @@ using UnityEngine.PlayerLoop;
 
 public class Charator : MonoBehaviour, Ideath
 {
-   public Rigidbody2D rb;
+    //public Rigidbody2D rb;
    public Animator anim;
-
+   public CharactorMovement movement;
    public StateMachine stateMachine;
 
    #region 参数
-   [Header("moveInfo")]
+   //[Header("moveInfo")]
 
-   // private bool isGround;
+   //// private bool isGround;
 
-   [SerializeField] private float movingSpeed;
+   //[SerializeField] private float movingSpeed;
 
-   [SerializeField] private float jumpForce;
-   [SerializeField] private int maxJumpNum = 0;
+   //[SerializeField] private float jumpForce;
+   //[SerializeField] private int maxJumpNum = 0;
 
-   [SerializeField] private float airMoveFactor;
+   //[SerializeField] private float airMoveFactor;
 
 
-   private int avaliableJump;
+   //private int avaliableJump;
    private int facingDir = 1;
 
-   [Header("collision")]
-   [SerializeField] private float groundDistance;
-   [SerializeField] private LayerMask whatIsGround;
+    [Header("collision")]
+    [SerializeField] private float groundDistance;
+    [SerializeField] private LayerMask whatIsGround;
 
-   [Header("boom")]
-   [SerializeField] private float thrownSpeed;
+    [Header("boom")]
+    [SerializeField] private float thrownSpeed;
 
-   [SerializeField] private GameObject boomPrefab;
-   [SerializeField] private Vector2 thrownDir;
+    [SerializeField] private GameObject boomPrefab;
+    [SerializeField] private Vector2 thrownDir;
 
-   [SerializeField] private float boomCoolDownDuration;
-   [SerializeField] private float CoolDownTimer;
-   [SerializeField] private Transform GoundDeteced;
+    [SerializeField] private float boomCoolDownDuration;
+    [SerializeField] private float CoolDownTimer;
+    [SerializeField] private Transform GroundDeteced;
 
    #endregion
    public float xInput;
@@ -49,14 +49,14 @@ public class Charator : MonoBehaviour, Ideath
    public bool isFacingRight = true;
 
    #region state
-   public CharactorIdleState IdleState { get; private set; }
-   public CharactorRun runState { get; private set; }
+   public State IdleState { get; private set; }
+   public State runState { get; private set; }
 
-   public CharactorAirState airState { get; private set; }
+   public State airState { get; private set; }
 
-   public CharactorDeathState deathState { get; private set; }
+   public State deathState { get; private set; }
 
-   public CharactorRespwanState respwanState { get; private set; }
+   public State respwanState { get; private set; }
    #endregion
 
    private float ReturnTime = 1f;
@@ -70,38 +70,33 @@ public class Charator : MonoBehaviour, Ideath
       airState = new CharactorAirState(this, "Air");
       deathState = new CharactorDeathState(this, "Die");
       respwanState = new CharactorRespwanState(this, "Respawn");
-   }
 
-
-   void Start()
+      movement = gameObject.GetComponent<CharactorMovement>();
+    }
+    void Start()
    {
-      rb = GetComponent<Rigidbody2D>();
       anim = GetComponentInChildren<Animator>();
       stateMachine.StateInitialized(IdleState);
-
-   }
-
-
+    }
    void Update()
    {
       CoolDownTimer -= Time.deltaTime;
       ReturnTimer -= Time.deltaTime;
 
       stateMachine.currentState.Update();
-      xInput = Input.GetAxisRaw("Horizontal");
-      //  Vector2 mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+        xInput = Input.GetAxisRaw("Horizontal");
 
+        if (isGrounded) 
+        {
+            movement.availableJump = movement.maxJumpNum;
+        }
+        else if (!isGrounded)
+        {
+            movement.availableJump = 0; 
+        }
 
-      if (isGround)
-         avaliableJump = maxJumpNum;
-
-      if (Input.GetButtonDown("Jump") && avaliableJump > 0)
-      {
-         ChractorJump();
-         avaliableJump--;
-      }
-      if (Input.GetKeyDown(KeyCode.Q) && CoolDownTimer < 0)//
+        if (Input.GetKeyDown(KeyCode.Q) && CoolDownTimer < 0)//
       {
          ThrownBoom(MousePositon.instance.mousePos);
          CoolDownTimer = boomCoolDownDuration;
@@ -118,26 +113,8 @@ public class Charator : MonoBehaviour, Ideath
       }
 
    }
-   public bool isGround => Physics2D.Raycast(GoundDeteced.position, Vector2.down, groundDistance, whatIsGround);  // 地面检测
-
-
-
-   public void ChractorMove() // 左右移动
-   {
-      rb.velocity = new Vector2(xInput * movingSpeed, rb.velocity.y);
-   }
-
-   public void AirMove()
-   {
-      rb.velocity = new Vector2(rb.velocity.x + airMoveFactor * xInput * Time.deltaTime, rb.velocity.y);
-   }
-
-   private void ChractorJump() // 跳跃
-   {
-      rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-   }
-
-   private void ThrownBoom(Vector2 _mousePositon)
+    public bool isGrounded => Physics2D.Raycast(GroundDeteced.position, Vector2.down, groundDistance, whatIsGround);  // 地面检测
+    private void ThrownBoom(Vector2 _mousePositon)
    {
       GameObject boom = PrefabList.prefabList.getInstance();
       boom.transform.position = transform.position;
@@ -147,14 +124,14 @@ public class Charator : MonoBehaviour, Ideath
       //Explode explode = boom.GetComponent<Explode>();
 
       // 直接给炸弹初速度，不在这里检测地面
-      Vector2 thrownDir = (_mousePositon - rb.position).normalized;
+      Vector2 thrownDir = (_mousePositon - movement.rb.position).normalized;
       boomRb.velocity = thrownDir * thrownSpeed;
    }
 
-   void OnDrawGizmos() // 地面检测调试
-   {
-      Gizmos.DrawLine(GoundDeteced.position, GoundDeteced.position + Vector3.down * groundDistance);
-   }
+   //void OnDrawGizmos() // 地面检测调试
+   //{
+   //   Gizmos.DrawLine(GroundDeteced.position, GroundDeteced.position + Vector3.down * groundDistance);
+   //}
 
    void Flip() //翻转函数
    {
