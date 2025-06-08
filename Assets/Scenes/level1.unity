@@ -7249,7 +7249,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
@@ -7269,7 +7269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4503ab633e633c04eafe9bc10834a946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charator: {fileID: 0}
   effector: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

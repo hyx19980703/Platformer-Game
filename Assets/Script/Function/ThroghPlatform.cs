@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ThroghPlatform : MonoBehaviour
 {
-    [SerializeField] private GameObject charator;
     [SerializeField] private PlatformEffector2D effector;
     //private LayerMask onewayPlatform;
 
@@ -31,12 +30,8 @@ public class ThroghPlatform : MonoBehaviour
         if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && passingTimer < 0)
         {
             // StartCoroutine("PassingThrough");
-            if (Input.GetKey(KeyCode.Space))
-            {
                 effector.rotationalOffset = 180;
                 passingTimer = passingDuration;
-
-            }
         }
         else if (passingTimer < 0)
             effector.rotationalOffset = 0;
@@ -47,10 +42,10 @@ public class ThroghPlatform : MonoBehaviour
     {
         if (isPassingThrogh == true) yield break;
         isPassingThrogh = true;
-        Physics2D.IgnoreLayerCollision(charator.layer, LayerMask.NameToLayer("OneWayPlatform"), true);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("OneWayPlatform"), true);
         Debug.Log("禁用层级碰撞");
         yield return new WaitForSeconds(passingDuration);
-        Physics2D.IgnoreLayerCollision(charator.layer, LayerMask.NameToLayer("OneWayPlatform"), false);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("OneWayPlatform"), false);
         Debug.Log("恢复层级碰撞");
         isPassingThrogh = false;
         
