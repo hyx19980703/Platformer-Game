@@ -5,41 +5,45 @@ using UnityEngine;
 
 public class DoorTrape : MonoBehaviour
 {
-    private BoxCollider2D collider2D;
-    [SerializeField] private float doorHight;
-    [SerializeField] private float maxHight;
-    [SerializeField] private float minHight;
+    private BoxCollider2D collider2D;    
+    [SerializeField] private Vector2 colliderSizeMultiplier = Vector2.one; // 快速创建 vector2(1,1)   // 用于在Inspector中调整碰撞机大小的乘数
+    [SerializeField] private Vector2 colliderOffsetMultiplier = Vector2.one; // 快速创建 vector2(1,1) // 用于在Inspector中调整碰撞机偏移的乘数
+     private Animator anim;
 
-    [SerializeField] private float closingSpeed;
-    [SerializeField] Transform doorPosition;
-    [SerializeField] private DoorTrriger doorTrriger;
-    private bool isClosing;
-    private float targetDoorHight;
+    private Vector2 originalColliderSize;     // 存储碰撞机的初始大小
+    private Vector2 originalColliderOffset;     // 存储碰撞机的初始偏移
+
+
+
+    private int pressPositionID;
+
+    private float pressPosition;
+
     void Start()
     {
-        doorTrriger = GetComponentInChildren<DoorTrriger>();
         collider2D = GetComponent<BoxCollider2D>();
+        anim = GetComponentInChildren<Animator>();
+
+        originalColliderSize = collider2D.size; 
+        originalColliderOffset = collider2D.offset;
+        
+         pressPositionID = Animator.StringToHash("pressPosition"); //获取变量名的哈希值，用户后续调用时提高性能
     }
 
-    void Update()
-    {
-        targetDoorHight = doorTrriger.isClosing ? minHight : maxHight;
+    void Update() {
 
-        doorHight = Mathf.Lerp(collider2D.size.y, targetDoorHight, closingSpeed * Time.deltaTime);
-
-        DoorColliderHight(doorHight);
+        pressPosition = anim.GetFloat(pressPositionID);  // 同 GetFloat("pressPosition") ,但性能更高
+        
+        DoorColliderHight(pressPosition);
     }
 
-    private void DoorColliderHight(float doorHight)
+    private void DoorColliderHight(float _pressPosition)
     {
-        collider2D.size = new Vector2(collider2D.size.x, doorHight);
+        collider2D.size = new Vector2(originalColliderSize.x * colliderOffsetMultiplier.x,
+        originalColliderSize.y+colliderSizeMultiplier.y*_pressPosition);
 
-    }
+        collider2D.offset = new Vector2(originalColliderOffset.x,
+        originalColliderOffset.y-_pressPosition/2);
 
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(doorPosition.position, doorPosition.position + Vector3.down * maxHight);
-        Gizmos.color = Color.black;
-        Gizmos.DrawLine(doorPosition.position, doorPosition.position + Vector3.down* minHight);
     }
 }
