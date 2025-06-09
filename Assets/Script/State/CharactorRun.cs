@@ -14,10 +14,10 @@ public class CharactorRun : State
         if (charator.isGround)
             Debug.Log("�ƶ�״̬");
             //charator.ChractorMove();
-            charator.movement.Move(charator.xInput,charator);
+            charator.movement.Move();
         if (!charator.isGround)
             charator.stateMachine.StateChange(charator.airState);
-        if (charator.xInput == 0)
+        if (charator.movement.xInput == 0)
             charator.stateMachine.StateChange(charator.IdleState);
     }
 
