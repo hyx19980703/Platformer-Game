@@ -15,6 +15,7 @@ public class Explode : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
     void Update()
@@ -25,6 +26,7 @@ public class Explode : MonoBehaviour
             Explosion();        // 再触发爆炸
             hasExploded = true; // 标记已爆炸，避免重复执行
             PrefabList.prefabList.RetrunObject(gameObject);
+
         }
     }
 
@@ -40,6 +42,7 @@ public class Explode : MonoBehaviour
 
     void Explosion()
     {
+
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explodeRadius);
         foreach (Collider2D hit in colliders)
         {
@@ -52,8 +55,9 @@ public class Explode : MonoBehaviour
             }
         }
 
-        transform.localScale=new Vector3(5,5,5);
-        
+
+        //transform.localScale = new Vector3(5, 5, 5);
+
     }
 
     public bool CheckNearGroundOrWall() => Physics2D.OverlapCircle(transform.position, detonationDistance, ground);

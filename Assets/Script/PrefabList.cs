@@ -9,6 +9,7 @@ public class PrefabList : MonoBehaviour
     private List<GameObject> listOfpreFab = new List<GameObject>();
     [SerializeField]private int maxNum;
     public static PrefabList prefabList;
+    
 
     void Awake()
     {
@@ -32,8 +33,11 @@ public class PrefabList : MonoBehaviour
 
     public void RetrunObject(GameObject _instance)
     {
+       
         listOfpreFab.Remove(_instance);
-        Destroy(_instance,0.1f);
+        Destroy(_instance, 0.1f);
+
+
 
     }
 

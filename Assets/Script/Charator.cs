@@ -55,6 +55,8 @@ public class Charator : MonoBehaviour, Ideath
    public CharactorDeathState deathState { get; private set; }
 
    public CharactorRespwanState respwanState { get; private set; }
+
+    public CharactorThrowState throwState { get; private set; }
    #endregion
 
    private float ReturnTime = 1f;
@@ -70,6 +72,8 @@ public class Charator : MonoBehaviour, Ideath
       airState = new CharactorAirState(this, "Air");
       deathState = new CharactorDeathState(this, "Die");
       respwanState = new CharactorRespwanState(this, "Respawn");
+        throwState = new CharactorThrowState(this, "isThrowed");
+      
    }
 
 
@@ -91,7 +95,8 @@ public class Charator : MonoBehaviour, Ideath
       //  Vector2 mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
       if (Input.GetKeyDown(KeyCode.Q) && CoolDownTimer < 0)//
       {
-         ThrownBoom(MousePositon.instance.mousePos);
+            stateMachine.StateChange(throwState);
+            ThrownBoom(MousePositon.instance.mousePos);
          CoolDownTimer = boomCoolDownDuration;
       }
 
