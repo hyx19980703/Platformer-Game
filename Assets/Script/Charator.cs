@@ -43,8 +43,6 @@ public class Charator : MonoBehaviour, Ideath
    [SerializeField] private Transform GoundDeteced;
 
    #endregion
-   public float xInput;
-   public float yInput;
 
    public bool isFacingRight = true;
 
@@ -90,19 +88,7 @@ public class Charator : MonoBehaviour, Ideath
       ReturnTimer -= Time.deltaTime;
 
       stateMachine.currentState.Update();
-      xInput = Input.GetAxisRaw("Horizontal");
       //  Vector2 mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-
-
-      if (isGround)
-         avaliableJump = maxJumpNum;
-
-      if (Input.GetButtonDown("Jump") && avaliableJump > 0)
-      {
-         ChractorJump();
-         avaliableJump--;
-      }
       if (Input.GetKeyDown(KeyCode.Q) && CoolDownTimer < 0)//
       {
          ThrownBoom(MousePositon.instance.mousePos);
@@ -121,23 +107,6 @@ public class Charator : MonoBehaviour, Ideath
 
    }
    public bool isGround => Physics2D.Raycast(GoundDeteced.position, Vector2.down, groundDistance, whatIsGround);  // 地面检测
-
-
-
-   public void ChractorMove() // 左右移动
-   {
-      rb.velocity = new Vector2(xInput * movingSpeed, rb.velocity.y);
-   }
-
-   public void AirMove()
-   {
-      rb.velocity = new Vector2(rb.velocity.x + airMoveFactor * xInput * Time.deltaTime, rb.velocity.y);
-   }
-
-   private void ChractorJump() // 跳跃
-   {
-      rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-   }
 
    private void ThrownBoom(Vector2 _mousePositon)
    {
@@ -160,13 +129,13 @@ public class Charator : MonoBehaviour, Ideath
 
    void Flip() //翻转函数
    {
-      if (xInput > 0 && !isFacingRight)
+      if (movement.xInput > 0 && !isFacingRight)
       {
          facingDir = facingDir * -1;
          transform.Rotate(0, 180, 0);
          isFacingRight = true;
       }
-      if (xInput < 0 && isFacingRight)
+      if (movement.xInput < 0 && isFacingRight)
       {
          facingDir = facingDir * -1;
          transform.Rotate(0, 180, 0);
