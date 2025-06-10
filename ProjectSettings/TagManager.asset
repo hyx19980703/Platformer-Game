@@ -15,7 +15,7 @@ TagManager:
   - Enemy
   - Checkpoint
   - backGround
-  - 
+  - OneWayPlatform
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: backGround
     uniqueID: 2051606627
+    locked: 0
+  - name: OneWayPlatfrom
+    uniqueID: 2149671459
     locked: 0
   - name: Ground
     uniqueID: 98611567

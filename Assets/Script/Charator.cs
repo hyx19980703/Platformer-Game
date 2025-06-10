@@ -20,7 +20,6 @@ public class Charator : MonoBehaviour, Ideath
    [SerializeField] private float movingSpeed;
 
    [SerializeField] private float jumpForce;
-   [SerializeField] private int maxJumpNum = 0;
 
    [SerializeField] private float airMoveFactor;
 
@@ -31,7 +30,7 @@ public class Charator : MonoBehaviour, Ideath
    [Header("collision")]
    [SerializeField] private float groundDistance;
    [SerializeField] private LayerMask whatIsGround;
-
+   [SerializeField] private LayerMask whatIsGround2; 
    [Header("boom")]
    [SerializeField] private float thrownSpeed;
 
@@ -61,6 +60,8 @@ public class Charator : MonoBehaviour, Ideath
    private float ReturnTimer;
 
    public CharactorMovement movement;
+
+   [SerializeField] EventPublisher eventPublisher;
    void Awake()
    {
 
@@ -79,6 +80,7 @@ public class Charator : MonoBehaviour, Ideath
       anim = GetComponentInChildren<Animator>();
       stateMachine.StateInitialized(IdleState);
       movement = GetComponent<CharactorMovement>();
+      eventPublisher = FindObjectOfType<EventPublisher>();  //注册一个事件触发者
    }
 
 
@@ -96,13 +98,18 @@ public class Charator : MonoBehaviour, Ideath
       }
 
       Flip();
-       /*如果不加时间，重生函数会因为玩家一直处于死亡线的位置而重复调用，转变状态时启用回复位置函数，最终玩家在死亡动画播放完成前就回到起始点 
-       还有一种做法是把回复位置函数放在respwan状态的entry函数
-       */
+      /*如果不加时间，重生函数会因为玩家一直处于死亡线的位置而重复调用，转变状态时启用回复位置函数，最终玩家在死亡动画播放完成前就回到起始点 
+      还有一种做法是把回复位置函数放在respwan状态的entry函数
+      */
       if (isUnderDeathLine() && ReturnTimer < 0)
       {
          ReturnTimer = ReturnTime;
          RespwanPlayer();
+      }
+
+      if (Input.GetKeyDown(KeyCode.S))
+      {
+         eventPublisher.EventTrriger();
       }
 
    }
@@ -114,9 +121,7 @@ public class Charator : MonoBehaviour, Ideath
       boom.transform.position = transform.position;
       Debug.Log("炸弹发射位置" + transform.position);
       Rigidbody2D boomRb = boom.GetComponent<Rigidbody2D>();
-
       //Explode explode = boom.GetComponent<Explode>();
-
       // 直接给炸弹初速度，不在这里检测地面
       Vector2 thrownDir = (_mousePositon - rb.position).normalized;
       boomRb.velocity = thrownDir * thrownSpeed;
@@ -146,13 +151,8 @@ public class Charator : MonoBehaviour, Ideath
 
    public  void RespwanPlayer()  // 
     { 
-  
         this.stateMachine.StateChange(this.deathState); //进入死亡状态
-
-           
     }
-    
-
 
   public bool isUnderDeathLine()
    {
