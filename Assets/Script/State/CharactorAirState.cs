@@ -27,7 +27,7 @@ public class CharactorAirState : State
         charator.movement.Move();
         charator.anim.SetFloat("yVector", charator.movement.rb.velocity.y);
 
-        if (charator.isGround())
+        if (charator.isGround)
             charator.stateMachine.StateChange(charator.IdleState);
     }
 }
