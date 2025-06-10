@@ -18,7 +18,7 @@ public class CharactorIdleState : State
             //ChractorMove();
         }
 
-                if (!charator.isGround)
+                if (!charator.isGround())
         {
             charator.stateMachine.StateChange(charator.airState);
             //ChractorMove();
