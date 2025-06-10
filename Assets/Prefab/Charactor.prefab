@@ -103,7 +103,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2098437043
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 1526987045, guid: 9174e2aef224e2d4fb2b506a2f9cbebf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -187,7 +187,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   anim: {fileID: 0}
-  stateMachine: {fileID: 0}
   movingSpeed: 5
   jumpForce: 20
   maxJumpNum: 1
@@ -202,9 +201,8 @@ MonoBehaviour:
   boomCoolDownDuration: 1
   CoolDownTimer: 0
   GoundDeteced: {fileID: 3880096485905115517}
-  xInput: 0
-  yInput: 0
   isFacingRight: 1
+  movement: {fileID: 0}
 --- !u!50 &2490368297981821370
 Rigidbody2D:
   serializedVersion: 4
