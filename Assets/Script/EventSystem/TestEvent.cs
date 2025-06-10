@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class TestEvent : MonoBehaviour
 {
-    public EventSubscriber eventSubscriber;
-    // Start is called before the first frame update
+    public EventPublisher eventPublisher;
+
     void Start()
     {
-        eventSubscriber = FindObjectOfType<EventSubscriber>();
+        eventPublisher = FindObjectOfType<EventPublisher>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)){
-        eventSubscriber.OnPressDownHandle();
-        }
+        if (Input.GetKeyDown(KeyCode.S))
+            eventPublisher.EventTrriger();
+    }
+
+
+    public void PressEvent()
+    {
+        Debug.Log("按下按键");
     }
 }

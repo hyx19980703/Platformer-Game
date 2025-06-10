@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,16 +8,12 @@ public class EventSubscriber : MonoBehaviour
 {
     public EventPublisher eventPublisher;
 
+    public TestEvent testEvent;
+
     void Start()
     {
         eventPublisher = FindObjectOfType<EventPublisher>();
-
-        eventPublisher.pressDown += OnPressDownHandle;
+        eventPublisher.pressDown += testEvent.PressEvent; //注册事件
     }
 
-
-    public void OnPressDownHandle()
-    {
-        Debug.Log("按下down");
-    }
 }
