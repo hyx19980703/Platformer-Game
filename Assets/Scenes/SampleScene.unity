@@ -1566,7 +1566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preFab: {fileID: 1136917519224260489, guid: c5818148a07abbc478657e47d1346b8c, type: 3}
-  maxNum: 0
+  maxNum: 2
 --- !u!4 &223782197
 Transform:
   m_ObjectHideFlags: 0
@@ -2414,6 +2414,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1690066808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1690066810}
+  - component: {fileID: 1690066809}
+  m_Layer: 0
+  m_Name: ExplosionPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1690066809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690066808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bb78f218482354981647c91ad5ea49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 3106116767677627151, guid: f92048037dc3efc4da70034802703351, type: 3}
+  initialPoolSize: 5
+--- !u!4 &1690066810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690066808}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.6619434, y: -1.51629, z: 0.017325228}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1987591630
 GameObject:
   m_ObjectHideFlags: 0
@@ -2715,6 +2761,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6412545727334250069, guid: c5818148a07abbc478657e47d1346b8c, type: 3}
+      propertyPath: explodeRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412545727334250069, guid: c5818148a07abbc478657e47d1346b8c, type: 3}
       propertyPath: explosionAnim
       value: 
       objectReference: {fileID: 461002538}
@@ -2724,7 +2774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6412545727334250069, guid: c5818148a07abbc478657e47d1346b8c, type: 3}
       propertyPath: upwardModifier
-      value: 10
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6690133646406277932, guid: c5818148a07abbc478657e47d1346b8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2780,6 +2830,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1087453400718976085, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
+      propertyPath: thrownSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1087453400718976085, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
       propertyPath: GroundDeteced
       value: 
@@ -2990,3 +3044,4 @@ SceneRoots:
   - {fileID: 222057439}
   - {fileID: 591579292}
   - {fileID: 545675702}
+  - {fileID: 1690066810}

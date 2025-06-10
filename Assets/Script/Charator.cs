@@ -17,15 +17,8 @@ public class Charator : MonoBehaviour, Ideath
 
    // private bool isGround;
 
-   [SerializeField] private float movingSpeed;
-
-   [SerializeField] private float jumpForce;
-   [SerializeField] private int maxJumpNum = 0;
-
-   [SerializeField] private float airMoveFactor;
 
 
-   private int avaliableJump;
    private int facingDir = 1;
 
    [Header("collision")]
@@ -45,6 +38,7 @@ public class Charator : MonoBehaviour, Ideath
    #endregion
 
    public bool isFacingRight = true;
+    public MousePositon mousePositon;
 
    #region state
    public CharactorIdleState IdleState { get; private set; }
@@ -125,7 +119,19 @@ public class Charator : MonoBehaviour, Ideath
       // 直接给炸弹初速度，不在这里检测地面
       Vector2 thrownDir = (_mousePositon - rb.position).normalized;
       boomRb.velocity = thrownDir * thrownSpeed;
-   }
+        if ((_mousePositon.x > rb.position.x) && !isFacingRight)
+        {
+            facingDir = facingDir * -1;
+            transform.Rotate(0, 180, 0);
+            isFacingRight = true;
+        }
+        else if ((_mousePositon.x < rb.position.x) && isFacingRight)
+        {
+            facingDir = facingDir * -1;
+            transform.Rotate(0, 180, 0);
+            isFacingRight = false;
+        }
+    }
 
    void OnDrawGizmos() // 地面检测调试
    {
@@ -134,6 +140,7 @@ public class Charator : MonoBehaviour, Ideath
 
    void Flip() //翻转函数
    {
+      
       if (movement.xInput > 0 && !isFacingRight)
       {
          facingDir = facingDir * -1;
@@ -141,7 +148,7 @@ public class Charator : MonoBehaviour, Ideath
          isFacingRight = true;
       }
       if (movement.xInput < 0 && isFacingRight)
-      {
+        {
          facingDir = facingDir * -1;
          transform.Rotate(0, 180, 0);
          isFacingRight = false;

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0d003526af159414387a2cf36aa4e196
+guid: bcce207024e04ed4fbf3800fb20f8fdb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_0
+      name: boom400p_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1a1a1f8f6153524d9589848017244ad
-      internalID: 2076649741
+      spriteID: cfdfd812098c4564fadab5b1f44ab970
+      internalID: 121711848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_1
+      name: boom400p_1
       rect:
         serializedVersion: 2
         x: 300
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e07865bece5f7114a8b746ff6134850d
-      internalID: 833467182
+      spriteID: 5306d895b918d824f8215541af48cbb4
+      internalID: -1093802701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_2
+      name: boom400p_2
       rect:
         serializedVersion: 2
         x: 600
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb2e5137232db0d4493f43461ccb8a62
-      internalID: 1604416024
+      spriteID: 1d7781ada6819824a9da2c986b67e7af
+      internalID: 441329387
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_3
+      name: boom400p_3
       rect:
         serializedVersion: 2
         x: 900
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df44daca79e8cff46b22cafc5acda634
-      internalID: -236845979
+      spriteID: 27232dc90720d2b45b288fbdd47dc77f
+      internalID: -2135772714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_4
+      name: boom400p_4
       rect:
         serializedVersion: 2
         x: 0
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de54db333c0d8734dab53e6af880b79d
-      internalID: -29791828
+      spriteID: fcf423006451069448a25ffdf0f85e92
+      internalID: 1026131790
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_5
+      name: boom400p_5
       rect:
         serializedVersion: 2
         x: 300
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfc87617d13d3d94dbdfceaa3df54972
-      internalID: 19231590
+      spriteID: ec7a0f210430bf94382f65214cbce475
+      internalID: 718465885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_6
+      name: boom400p_6
       rect:
         serializedVersion: 2
         x: 600
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 969ad04ba6274de45a1907909512ede2
-      internalID: 389734855
+      spriteID: 7c37b3b8550714846a71a08a7c22b7b5
+      internalID: -1552665257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_7
+      name: boom400p_7
       rect:
         serializedVersion: 2
         x: 900
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d118b755c261a043ac7fd3d3cf142ad
-      internalID: 739538063
+      spriteID: 3edec38dada100843a0de62c31dc80ff
+      internalID: -1206367167
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_8
+      name: boom400p_8
       rect:
         serializedVersion: 2
         x: 0
@@ -292,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a72ddc27f5ffa264ea30cfa68e9911ea
-      internalID: -987470573
+      spriteID: ee985e83f1053b94484a14e923c18ae6
+      internalID: 2074955279
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_9
+      name: boom400p_9
       rect:
         serializedVersion: 2
         x: 300
@@ -313,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3807116f409f3a545b70367266550e4c
-      internalID: -1472678100
+      spriteID: 5164a17075503b3478078e6bab003ac5
+      internalID: 102285007
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_10
+      name: boom400p_10
       rect:
         serializedVersion: 2
         x: 600
@@ -334,14 +334,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87cb2730aeba92b409e1d28f8b209c05
-      internalID: 1419106986
+      spriteID: 6659f0066323624498dc4c7481f2b4b3
+      internalID: 1469834853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boom400x400-ezgif.com-gif-to-sprite-converter_11
+      name: boom400p_11
       rect:
         serializedVersion: 2
         x: 900
@@ -355,8 +355,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c2b9db20763f0946aef288b5c12215c
-      internalID: -1682507473
+      spriteID: 290bd4e89f044dd40a9efcf5990cb6a7
+      internalID: 60234354
       vertices: []
       indices: 
       edges: []
@@ -372,18 +372,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      boom400x400-ezgif.com-gif-to-sprite-converter_0: 2076649741
-      boom400x400-ezgif.com-gif-to-sprite-converter_1: 833467182
-      boom400x400-ezgif.com-gif-to-sprite-converter_10: 1419106986
-      boom400x400-ezgif.com-gif-to-sprite-converter_11: -1682507473
-      boom400x400-ezgif.com-gif-to-sprite-converter_2: 1604416024
-      boom400x400-ezgif.com-gif-to-sprite-converter_3: -236845979
-      boom400x400-ezgif.com-gif-to-sprite-converter_4: -29791828
-      boom400x400-ezgif.com-gif-to-sprite-converter_5: 19231590
-      boom400x400-ezgif.com-gif-to-sprite-converter_6: 389734855
-      boom400x400-ezgif.com-gif-to-sprite-converter_7: 739538063
-      boom400x400-ezgif.com-gif-to-sprite-converter_8: -987470573
-      boom400x400-ezgif.com-gif-to-sprite-converter_9: -1472678100
+      boom400p_0: 121711848
+      boom400p_1: -1093802701
+      boom400p_10: 1469834853
+      boom400p_11: 60234354
+      boom400p_2: 441329387
+      boom400p_3: -2135772714
+      boom400p_4: 1026131790
+      boom400p_5: 718465885
+      boom400p_6: -1552665257
+      boom400p_7: -1206367167
+      boom400p_8: 2074955279
+      boom400p_9: 102285007
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

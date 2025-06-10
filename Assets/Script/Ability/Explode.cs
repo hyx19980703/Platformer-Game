@@ -10,19 +10,23 @@ public class Explode : MonoBehaviour
     [SerializeField] private float upwardModifier = 0.3f;
     
     private Rigidbody2D rb;
+    private GameObject currentExplosion; // 当前激活的爆炸特效
     private bool hasExploded = false; // 防止重复爆炸
 
     void Start()
     {
+
         rb = GetComponent<Rigidbody2D>();
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
     void Update()
     {
+        
         if (!hasExploded && CheckNearGroundOrWall())
         {
             StopBoomMovement(); // 先停止炸弹移动
+            TriggerExplosionEffect(); // 触发爆炸特效
             Explosion();        // 再触发爆炸
             hasExploded = true; // 标记已爆炸，避免重复执行
             PrefabList.prefabList.RetrunObject(gameObject);
@@ -54,11 +58,44 @@ public class Explode : MonoBehaviour
                 hitRb.velocity = direction * explodeForce;
             }
         }
+        
 
 
         //transform.localScale = new Vector3(5, 5, 5);
 
     }
+    void TriggerExplosionEffect()
+    {
+        // 从对象池获取特效
+        currentExplosion = ExplosionPoolManager.instance.GetExplosion();
+
+        if (currentExplosion != null)
+        {
+            currentExplosion.transform.position = transform.position;
+            currentExplosion.transform.rotation = Quaternion.identity;
+            currentExplosion.SetActive(true);
+
+            // 获取Animator组件并播放动画
+            Animator animator = currentExplosion.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.Play("boom400ppppp");
+
+                // 计算动画时长并在结束时回收特效
+                float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+                Invoke("ReturnExplosionToPool", animationLength);
+            }
+        }
+    }
+    void ReturnExplosionToPool()
+    {
+        if (currentExplosion != null)
+        {
+            ExplosionPoolManager.instance.ReturnExplosion(currentExplosion);
+        }
+    }
+
+
 
     public bool CheckNearGroundOrWall() => Physics2D.OverlapCircle(transform.position, detonationDistance, ground);
 
