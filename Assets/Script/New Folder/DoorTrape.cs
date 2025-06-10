@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DoorTrape : MonoBehaviour
 {
-    private BoxCollider2D collider2D;    
+   [SerializeField] private BoxCollider2D collider2D;    
     [SerializeField] private Vector2 colliderSizeMultiplier = Vector2.one; // 快速创建 vector2(1,1)   // 用于在Inspector中调整碰撞机大小的乘数
     [SerializeField] private Vector2 colliderOffsetMultiplier = Vector2.one; // 快速创建 vector2(1,1) // 用于在Inspector中调整碰撞机偏移的乘数
      private Animator anim;

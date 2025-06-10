@@ -27,30 +27,32 @@ public class ThroghPlatform : MonoBehaviour
     void Update()
     {
         passingTimer -= Time.deltaTime;
-        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && passingTimer < 0)
-        {
-            // StartCoroutine("PassingThrough");
-                effector.rotationalOffset = 180;
-                passingTimer = passingDuration;
-        }
-        else if (passingTimer < 0)
-            effector.rotationalOffset = 0;
+            if(passingTimer<0)
+           effector.rotationalOffset = 0;
     }
 
- // 备用方案 层级碰撞
-    IEnumerator PassingThrough()
+    public void PassingThrough()
     {
-        if (isPassingThrogh == true) yield break;
-        isPassingThrogh = true;
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("OneWayPlatform"), true);
-        Debug.Log("禁用层级碰撞");
-        yield return new WaitForSeconds(passingDuration);
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("OneWayPlatform"), false);
-        Debug.Log("恢复层级碰撞");
-        isPassingThrogh = false;
+        Debug.Log("触发单向功能");
+        effector.rotationalOffset = 180;
+        passingTimer = passingDuration;
+
+    }
+
+    // 备用方案 层级碰撞
+    // public IEnumerator PassingThrough()
+    // {
+    //     if (isPassingThrogh == true) yield break;
+    //     isPassingThrogh = true;
+    //     Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("OneWayPlatform"), true);
+    //     Debug.Log("禁用层级碰撞");
+    //     yield return new WaitForSeconds(passingDuration);
+    //     Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("OneWayPlatform"), false);
+    //     Debug.Log("恢复层级碰撞");
+    //     isPassingThrogh = false;
         
 
-    }
+    // }
 
 
 

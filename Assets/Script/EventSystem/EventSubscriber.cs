@@ -8,12 +8,12 @@ public class EventSubscriber : MonoBehaviour
 {
     public EventPublisher eventPublisher;
 
-    public TestEvent testEvent;
+    public ThroghPlatform throghPlatform ;
 
     void Start()
-    {
+    {   
         eventPublisher = FindObjectOfType<EventPublisher>();
-        eventPublisher.pressDown += testEvent.PressEvent; //注册事件
+        eventPublisher.pressDown += throghPlatform.PassingThrough; //注册按下蹲按键
     }
 
 }
