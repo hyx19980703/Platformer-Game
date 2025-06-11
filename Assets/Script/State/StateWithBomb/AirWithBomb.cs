@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharactorAirState : State
+public class AirWithBomb : State
 {
-    public CharactorAirState(Charator _charator, string _animName) : base(_charator, _animName)
+    public AirWithBomb(Charator _charator, string _animName) : base(_charator, _animName)
     {
 
     }
@@ -13,26 +13,26 @@ public class CharactorAirState : State
     {
         base.Entry();
     }
+
     public override void Exit()
     {
         base.Exit();
-
     }
 
     public override void Update()
     {
         base.Update();
-        Debug.Log("空中状态");
-        //charator.AirMove();
         charator.movement.Move();
         charator.anim.SetFloat("yVector", charator.movement.rb.velocity.y);
 
-        if (Input.GetKey(KeyCode.Q))
+        if (charator.isGround)
         {
-            charator.stateMachine.StateChange(charator.airWithBomb);
+            charator.stateMachine.StateChange(charator.idleWithBomb);
         }
 
-        if (charator.isGround)
-            charator.stateMachine.StateChange(charator.IdleState);
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            charator.stateMachine.StateChange(charator.throwState);
+        }
     }
 }

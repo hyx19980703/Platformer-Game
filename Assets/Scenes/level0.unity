@@ -2868,6 +2868,10 @@ PrefabInstance:
       propertyPath: groundDistance
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1087453400718976085, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
+      propertyPath: boomCoolDownDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4085926929481416862, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.43
@@ -3061,7 +3065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3600651077732452199, guid: f92048037dc3efc4da70034802703351, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4148337173780035336, guid: f92048037dc3efc4da70034802703351, type: 3}
       propertyPath: m_LocalPosition.x

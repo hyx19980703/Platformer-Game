@@ -13,8 +13,12 @@ public class CharactorRun : State
         base.Update();
         if (charator.isGround)
             Debug.Log("�ƶ�״̬");
-            //charator.ChractorMove();
             charator.movement.Move();
+        if (charator.isGround && Input.GetKey(KeyCode.Q))
+        {
+            charator.movement.Move();
+            charator.stateMachine.StateChange(charator.runWithBomb);
+        }
         if (!charator.isGround)
             charator.stateMachine.StateChange(charator.airState);
         if (charator.movement.xInput == 0)
