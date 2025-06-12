@@ -25,10 +25,6 @@ public class CharactorIdleState : State
             charator.stateMachine.StateChange(charator.airState);
             //ChractorMove();
         }
-        if (Input.GetKey(KeyCode.Q) && charator.isGround)
-        {
-            charator.stateMachine.StateChange(charator.idleWithBomb);
-        }
 
     }
 

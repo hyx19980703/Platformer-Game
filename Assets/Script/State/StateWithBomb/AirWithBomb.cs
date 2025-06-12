@@ -22,17 +22,16 @@ public class AirWithBomb : State
     public override void Update()
     {
         base.Update();
-        charator.movement.Move();
-        charator.anim.SetFloat("yVector", charator.movement.rb.velocity.y);
+        //charator.movement.Move();
+        //charator.anim.SetFloat("yVector", charator.movement.rb.velocity.y);
 
-        if (charator.isGround)
-        {
-            charator.stateMachine.StateChange(charator.idleWithBomb);
-        }
-
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            charator.stateMachine.StateChange(charator.throwState);
-        }
+        //if (charator.isGround)
+        //{
+        //    charator.stateMachine.StateChange(charator.idleWithBomb);
+        //}
+        //if (Input.GetKeyUp(KeyCode.Q))
+        //{
+        //    charator.stateMachine.StateChange(charator.throwState);
+        //}
     }
 }

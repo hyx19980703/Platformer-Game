@@ -27,10 +27,6 @@ public class CharactorAirState : State
         charator.movement.Move();
         charator.anim.SetFloat("yVector", charator.movement.rb.velocity.y);
 
-        if (Input.GetKey(KeyCode.Q))
-        {
-            charator.stateMachine.StateChange(charator.airWithBomb);
-        }
 
         if (charator.isGround)
             charator.stateMachine.StateChange(charator.IdleState);

@@ -22,20 +22,20 @@ public class IdleWithBomb : State
     public override void Update()
     {
         base.Update();
-        if(Input.GetKey(KeyCode.Q) && charator.movement.xInput !=0 )
-        {
-            charator.stateMachine.StateChange(charator.runWithBomb);
-        }
+        //if (/*Input.GetKey(KeyCode.Q) &&*/ charator.movement.xInput != 0)
+        //{
+        //    charator.stateMachine.StateChange(charator.runWithBomb);
+        //}
 
-        if(Input.GetKey(KeyCode.Q) && !charator.isGround)
-        {
-            charator.stateMachine.StateChange(charator.airWithBomb);
-        }
+        //if (/*Input.GetKey(KeyCode.Q) && */!charator.isGround)
+        //{
+        //    charator.stateMachine.StateChange(charator.airWithBomb);
+        //}
 
 
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            charator.stateMachine.StateChange(charator.throwState);
-        }
+        //if (Input.GetKeyUp(KeyCode.Q))
+        //{
+        //    charator.stateMachine.StateChange(charator.throwState);
+        //}
     }
 }

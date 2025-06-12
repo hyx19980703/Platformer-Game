@@ -23,15 +23,15 @@ public class RunWithBomb : State
     public override void Update()
     {
         base.Update();
-        charator.movement.Move();
-        if (Input.GetKey(KeyCode.Q) && charator.movement.xInput == 0)
-        {
-            charator.stateMachine.StateChange(charator.idleWithBomb);
-        }
+        //charator.movement.Move();
+        //if (/*Input.GetKey(KeyCode.Q) &&*/ charator.movement.xInput == 0)
+        //{
+        //    charator.stateMachine.StateChange(charator.idleWithBomb);
+        //}
 
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            charator.stateMachine.StateChange(charator.throwState);
-        }
+        ////if (Input.GetKeyUp(KeyCode.Q))
+        ////{
+        ////    charator.stateMachine.StateChange(charator.throwState);
+        ////}
     }
 }

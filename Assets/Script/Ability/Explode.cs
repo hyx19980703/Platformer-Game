@@ -8,22 +8,27 @@ public class Explode : MonoBehaviour
     [SerializeField] private float detonationDistance = 0.1f;
     [SerializeField] private LayerMask ground;            
     [SerializeField] private float upwardModifier = 0.3f;
+    private float remainingTime;
     
     private Rigidbody2D rb;
+    private Charator charator;
     private GameObject currentExplosion; // 当前激活的爆炸特效
     private bool hasExploded = false; // 防止重复爆炸
 
     void Start()
     {
-
+        charator = GetComponent<Charator>();
         rb = GetComponent<Rigidbody2D>();
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
     void Update()
     {
-        
-        if (!hasExploded && CheckNearGroundOrWall())
+        if (remainingTime > 0)
+        {
+            remainingTime -= Time.deltaTime*2;
+        }
+        if (!hasExploded && (remainingTime <= 0||CheckNearGroundOrWall()))
         {
             StopBoomMovement(); // 先停止炸弹移动
             TriggerExplosionEffect(); // 触发爆炸特效
@@ -64,7 +69,11 @@ public class Explode : MonoBehaviour
         //transform.localScale = new Vector3(5, 5, 5);
 
     }
-    void TriggerExplosionEffect()
+    public void SetHoldTime(float holdTime)
+    {
+        remainingTime = 1.5f - holdTime;
+    }
+    public void TriggerExplosionEffect()
     {
         // 从对象池获取特效
         currentExplosion = ExplosionPoolManager.instance.GetExplosion();

@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explodeForce: 22
-  explodeRadius: 4
+  explodeRadius: 5
   detonationDistance: 0.1
   ground:
     serializedVersion: 2
