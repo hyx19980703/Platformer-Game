@@ -11,6 +11,7 @@ public class Charator : MonoBehaviour, Ideath
     public Animator anim;
     public GameObject explosionEffect;
     public StateMachine stateMachine;
+    private GameObject boom;
 
     #region 参数
     [Header("moveInfo")]
@@ -33,9 +34,9 @@ public class Charator : MonoBehaviour, Ideath
 
     [SerializeField] private float boomCoolDownDuration;
     [SerializeField] private float CoolDownTimer;
-    [SerializeField] private float BombCountDown;
+    [SerializeField] public float BombCountDown;
     public float holdBombTimer = 0f; // 新增变量，用于记录持炸弹的时间
-    private bool BombCoolDown = false;
+    public bool BombCoolDown = false;
 
 
     [SerializeField] private Transform GoundDeteced;
@@ -91,7 +92,8 @@ public class Charator : MonoBehaviour, Ideath
         stateMachine.StateInitialized(IdleState);
         movement = GetComponent<CharactorMovement>();
         holdBombTimer = 0f;
-
+        //boom = PrefabList.prefabList.getInstance();
+        //boom.SetActive(false);
     }
 
 
@@ -99,31 +101,36 @@ public class Charator : MonoBehaviour, Ideath
     {
         //CoolDownTimer -= Time.deltaTime;
         ReturnTimer -= Time.deltaTime;
-        BombCountDown = 3f;
+        BombCountDown = 1.5f;
         stateMachine.currentState.Update();
 
-        if ( Input.GetKey(KeyCode.Q)&& !BombCoolDown )
+
+        if (boom == null || Input.GetKeyDown(KeyCode.Mouse0))
         {
-            anim.SetLayerWeight(1, 1);
-            holdBombTimer += Time.deltaTime;
-            if (holdBombTimer >= BombCountDown) // 持炸弹时间达到三秒，触发爆炸
+            boom = PrefabList.prefabList.getInstance();
+            boom.SetActive(false);
+        }
+        if ( Input.GetKey(KeyCode.Mouse0)&& !BombCoolDown )
+        {
+            anim.SetLayerWeight(1, 1);//控制人物动画机权重，进入持炸弹动画
+            holdBombTimer += Time.deltaTime;//记录人物手持炸弹的时长
+            Vector3 offset = new Vector3(0, 1.0f, 0);//炸弹生成位置修正值
+            boom.transform.position = transform.position + offset;//修正炸弹生成地点
+            if(holdBombTimer >= 1.5f)//手持超过1.5s爆炸，这里设定是手持会延迟炸弹引爆，所以并一定不是引线时长，引线时长在炸弹脚本里。
             {
-                ExplodeBomb();  //只触发爆炸特效
-                holdBombTimer = 0f;  
-                BombCoolDown = true;
-                anim.SetLayerWeight(1, 0);
-                Invoke("ExplosionCoolDown", 1f);
+                boom.SetActive(true);//激活预制体，开始运行炸弹内部逻辑
+                anim.SetLayerWeight(1, 0);//退出持炸弹动画
+                BombCoolDown = true;//中断Q键输入，炸弹进入冷却
+                Invoke("ExplosionCoolDown",2f);//2s后炸弹恢复冷却
             }
         }
         //  Vector2 mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if ( Input.GetKeyUp(KeyCode.Q)&& !BombCoolDown )//
+        if (Input.GetKeyUp(KeyCode.Mouse0) && !BombCoolDown)
         {
-            //holdBombTimer = 0f;
-            anim.SetLayerWeight(1, 0);
+            anim.SetLayerWeight(1, 0);//扔出炸弹后切换回非手持状态
             stateMachine.StateChange(throwState);
             ThrownBoom(MousePositon.instance.mousePos);
-            holdBombTimer = 0f;
-            //CoolDownTimer = boomCoolDownDuration;
+            holdBombTimer = 0f;//扔出炸弹后重新计算手持时间
         }
 
         Flip();
@@ -141,23 +148,13 @@ public class Charator : MonoBehaviour, Ideath
 
     private void ThrownBoom(Vector2 _mousePositon)
     {
-        GameObject boom = PrefabList.prefabList.getInstance();
+        boom.SetActive(true);
         boom.transform.position = transform.position;
         Debug.Log("炸弹发射位置" + transform.position);
         Rigidbody2D boomRb = boom.GetComponent<Rigidbody2D>();
-
-        //Explode explode = boom.GetComponent<Explode>();
-
         // 直接给炸弹初速度，不在这里检测地面
         Vector2 thrownDir = (_mousePositon - rb.position).normalized;
         boomRb.velocity = thrownDir * thrownSpeed;
-
-        Explode bombScript = boom.GetComponent<Explode>();
-        if (bombScript != null)
-        {
-            bombScript.SetHoldTime(holdBombTimer);
-        }
-
         if ((_mousePositon.x > rb.position.x) && !isFacingRight)
         {
             facingDir = facingDir * -1;
@@ -202,9 +199,6 @@ public class Charator : MonoBehaviour, Ideath
 
 
     }
-
-
-
     public bool isUnderDeathLine()
     {
         if (this.transform.position.y <= GameManager.Instance.deathLine.position.y)
@@ -212,38 +206,7 @@ public class Charator : MonoBehaviour, Ideath
         else
             return false;
     }
-    void ReturnExplosionToPool()
-    {
-        if (explosionEffect != null)
-        {
-            ExplosionPoolManager.instance.ReturnExplosion(explosionEffect);
-        }
-    }
-    private void ExplodeBomb() // 新增函数，用于触发炸弹爆炸
-    {
-        explosionEffect = ExplosionPoolManager.instance.GetExplosion();
-        if (explosionEffect != null)
-        {
-            Vector3 offset = new Vector3(0, 1.0f, 0);
-            explosionEffect.transform.position = transform.position + offset;
-            explosionEffect.SetActive(true);
-
-            Animator animator = explosionEffect.GetComponent<Animator>();
-            
-            if (animator != null)
-            {
-                animator.Play("boom400ppppp");
-
-                // 计算动画时长并在结束时回收特效
-                float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
-
-                Invoke("ReturnExplosionToPool", animationLength);
-            }
-        }
-        //BombCountDown = 3f;
-        holdBombTimer = 0f;
-    }
-    private void ExplosionCoolDown()
+    public void ExplosionCoolDown()
     {
         BombCoolDown= false;
     }

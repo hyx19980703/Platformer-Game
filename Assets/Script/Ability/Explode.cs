@@ -9,33 +9,54 @@ public class Explode : MonoBehaviour
     [SerializeField] private LayerMask ground;            
     [SerializeField] private float upwardModifier = 0.3f;
     private float remainingTime;
+    private float bombFuseTime;
     
     private Rigidbody2D rb;
-    private Charator charator;
+    private GameObject player;
+    private Charator playerScript;
     private GameObject currentExplosion; // 当前激活的爆炸特效
     private bool hasExploded = false; // 防止重复爆炸
 
     void Start()
     {
-        charator = GetComponent<Charator>();
         rb = GetComponent<Rigidbody2D>();
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
+     void OnEnable()
+    {
+        bombFuseTime = 1.5f;
+        player = GameObject.Find("Charactor");
+        if (player != null)
+        {
+            playerScript = player.GetComponent<Charator>();
+            remainingTime = bombFuseTime - playerScript.holdBombTimer;
+        }
+    }
+
 
     void Update()
     {
-        if (remainingTime > 0)
+
+        //Debug.Log("手持时长：" + playerScript.holdBombTimer);
+
+        if (playerScript != null && playerScript.holdBombTimer >= playerScript.BombCountDown)
         {
-            remainingTime -= Time.deltaTime*2;
+            TriggerExplosionEffect(currentExplosion, transform.position); // 触发爆炸特效
+            Explosion();        // 再触发爆炸
+            playerScript.holdBombTimer = 0f;//重置人物手持炸弹冷却
+            PrefabList.prefabList.RetrunObject(gameObject);
+        }
+        if ( remainingTime> 0)
+        {
+             remainingTime -= Time.deltaTime*2;
         }
         if (!hasExploded && (remainingTime <= 0||CheckNearGroundOrWall()))
         {
             StopBoomMovement(); // 先停止炸弹移动
-            TriggerExplosionEffect(); // 触发爆炸特效
+            TriggerExplosionEffect(currentExplosion,transform.position); // 触发爆炸特效
             Explosion();        // 再触发爆炸
             hasExploded = true; // 标记已爆炸，避免重复执行
             PrefabList.prefabList.RetrunObject(gameObject);
-
         }
     }
 
@@ -69,18 +90,18 @@ public class Explode : MonoBehaviour
         //transform.localScale = new Vector3(5, 5, 5);
 
     }
-    public void SetHoldTime(float holdTime)
-    {
-        remainingTime = 1.5f - holdTime;
-    }
-    public void TriggerExplosionEffect()
+    //public void SetHoldTime(float holdTime)
+    //{
+    //    remainingTime = 1.5f - holdTime;
+    //}
+    public void TriggerExplosionEffect(GameObject currentExplosion,Vector2 explosionPosition)
     {
         // 从对象池获取特效
         currentExplosion = ExplosionPoolManager.instance.GetExplosion();
 
         if (currentExplosion != null)
         {
-            currentExplosion.transform.position = transform.position;
+            currentExplosion.transform.position = explosionPosition;
             currentExplosion.transform.rotation = Quaternion.identity;
             currentExplosion.SetActive(true);
 
