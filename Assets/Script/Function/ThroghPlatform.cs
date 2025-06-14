@@ -17,6 +17,7 @@ public class ThroghPlatform : MonoBehaviour
     void Start()
     {
         effector = GetComponent<PlatformEffector2D>();
+        EventManager.OnKeyPressed += PassingThrough;
         
     }
     /*
