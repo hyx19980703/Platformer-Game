@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
+using UnityEditor.Scripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -61,7 +62,7 @@ public class Charator : MonoBehaviour, Ideath
 
    public CharactorMovement movement;
 
-   [SerializeField] EventPublisher eventPublisher;
+
    void Awake()
    {
 
@@ -80,7 +81,6 @@ public class Charator : MonoBehaviour, Ideath
       anim = GetComponentInChildren<Animator>();
       stateMachine.StateInitialized(IdleState);
       movement = GetComponent<CharactorMovement>();
-      eventPublisher = FindObjectOfType<EventPublisher>();  //注册一个事件触发者
    }
 
 
@@ -109,12 +109,11 @@ public class Charator : MonoBehaviour, Ideath
 
       if (Input.GetKeyDown(KeyCode.S))
       {
-         eventPublisher.EventTrriger();
+         EventManager.TriggerKeyPressedEvent();
       }
 
    }
    public bool isGround => Physics2D.Raycast(GoundDeteced.position, Vector2.down, groundDistance, whatIsGround);  // 地面检测
-
    private void ThrownBoom(Vector2 _mousePositon)
    {
       GameObject boom = PrefabList.prefabList.getInstance();

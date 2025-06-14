@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 456942520}
   - component: {fileID: 456942519}
   m_Layer: 0
-  m_Name: EventPublisher
+  m_Name: EventManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6601,52 +6601,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 737428515d58c4e4b9066312aae5ed3f, type: 3}
---- !u!1 &1622068690
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1622068692}
-  - component: {fileID: 1622068691}
-  m_Layer: 0
-  m_Name: EventSubScriber
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1622068691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1622068690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1617aa88abba7974e9303616879bfe39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventPublisher: {fileID: 456942519}
-  throghPlatform: {fileID: 2138268514}
---- !u!4 &1622068692
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1622068690}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.172044, y: 6.421886, z: -0.04782442}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1628636784 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1087453400718976085, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
@@ -7019,7 +6973,7 @@ GameObject:
   - component: {fileID: 2138268510}
   - component: {fileID: 2138268513}
   - component: {fileID: 2138268514}
-  m_Layer: 10
+  m_Layer: 3
   m_Name: onewayplatfrm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7429,4 +7383,3 @@ SceneRoots:
   - {fileID: 2046605093}
   - {fileID: 840353964}
   - {fileID: 456942520}
-  - {fileID: 1622068692}
