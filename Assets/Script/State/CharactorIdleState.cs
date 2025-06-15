@@ -15,14 +15,17 @@ public class CharactorIdleState : State
         if (charator.isGround && charator.movement.xInput != 0)
         {
             charator.stateMachine.StateChange(charator.runState);
+
+
             //ChractorMove();
         }
 
-                if (!charator.isGround)
+        if (!charator.isGround)
         {
             charator.stateMachine.StateChange(charator.airState);
             //ChractorMove();
         }
+
     }
 
     public override void Entry()

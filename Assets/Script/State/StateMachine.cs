@@ -10,7 +10,6 @@ public class StateMachine
         currentState = _currentState;
         currentState.Entry();
     }
-
     public void StateChange(State _currentState)
     {
         currentState.Exit();

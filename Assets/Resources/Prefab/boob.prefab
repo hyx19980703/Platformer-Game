@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3692163794599985417}
   - component: {fileID: 6412545727334250069}
   - component: {fileID: -4099013872139523609}
+  - component: {fileID: -8346686858462624611}
   m_Layer: 0
   m_Name: boob
   m_TagString: Untagged
@@ -75,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 2098437043
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 29372235, guid: 2c197d2c20a1cfb41a7e0e7cff37d993, type: 3}
-  m_Color: {r: 0.8301887, g: 0.82030255, b: 0.090067655, a: 1}
+  m_Sprite: {fileID: -1370622997, guid: 21f97c0434b89774ab8542135577cdc0, type: 3}
+  m_Color: {r: 0.49803925, g: 0.49803925, b: 0.49803925, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -98,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d4e760da79f5b42827623351e92bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explodeForce: 25
-  explodeRadius: 10
+  explodeForce: 22
+  explodeRadius: 5
   detonationDistance: 0.1
   ground:
     serializedVersion: 2
@@ -132,3 +133,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &-8346686858462624611
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136917519224260489}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a7d13fed8815dc4797992d3b728e476, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
