@@ -12,6 +12,7 @@ public class CharactorRespwanState : State
     public override void Entry()
     {
         base.Entry();
+        charator.anim.SetLayerWeight(1, 0);
     }
 
     public override void Exit()

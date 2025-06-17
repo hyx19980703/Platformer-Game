@@ -6904,6 +6904,19 @@ MonoBehaviour:
   airMoveFactor: 10
   availableJump: 1
   xInput: 0
+--- !u!114 &1628636786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131320796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9083034ba6284546b70af331928f6db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1001 &1797695807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6976,6 +6989,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6980803788216068854, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1628636785}
+    - targetCorrespondingSourceObject: {fileID: 6980803788216068854, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1628636786}
   m_SourcePrefab: {fileID: 100100000, guid: 3fa8bfb39a6638b4cbc4691a924355db, type: 3}
 --- !u!1 &2046605091
 GameObject:
