@@ -4,7 +4,8 @@ public class Explode : MonoBehaviour
 {
     [Header("explode")]
     [SerializeField] private float explodeForce;    
-    [SerializeField] private float explodeRadius;    
+    [SerializeField] private float explodeRadius;
+    [SerializeField] private float explodeHurtRadius;
     [SerializeField] private float detonationDistance = 0.1f;
     [SerializeField] private LayerMask ground;            
     [SerializeField] private float upwardModifier = 0.3f;
@@ -16,6 +17,7 @@ public class Explode : MonoBehaviour
     private Charator playerScript;
     private GameObject currentExplosion; // 当前激活的爆炸特效
     private bool hasExploded = false; // 防止重复爆炸
+    private bool hurt;
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class Explode : MonoBehaviour
     }
      void OnEnable()
     {
+        hurt = false;
         bombFuseTime = 1.5f;
         player = GameObject.Find("Charactor");
         if (player != null)
@@ -36,13 +39,17 @@ public class Explode : MonoBehaviour
 
     void Update()
     {
-
+        if(hurt)
+        {
+            EventManager.OtherEvent();
+        }
         //Debug.Log("手持时长：" + playerScript.holdBombTimer);
 
         if (playerScript != null && playerScript.holdBombTimer >= playerScript.maxHoldTime)
         {
             TriggerExplosionEffect(transform.position); // 触发爆炸特效
             Explosion();        // 再触发爆炸
+            ExplosionHurt();
             playerScript.holdBombTimer = 0f;//重置人物手持炸弹冷却
             PrefabList.prefabList.RetrunObject(gameObject);
         }
@@ -55,6 +62,7 @@ public class Explode : MonoBehaviour
             StopBoomMovement(); // 先停止炸弹移动
             TriggerExplosionEffect(transform.position); // 触发爆炸特效
             Explosion();        // 再触发爆炸
+            ExplosionHurt();   //触发爆炸伤害
             hasExploded = true; // 标记已爆炸，避免重复执行
             playerScript.holdBombTimer = 0f;    
             PrefabList.prefabList.RetrunObject(gameObject);
@@ -86,6 +94,24 @@ public class Explode : MonoBehaviour
             }
         }
         
+
+
+        //transform.localScale = new Vector3(5, 5, 5);
+
+    }
+    void ExplosionHurt()
+    {
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explodeHurtRadius);
+        foreach (Collider2D hit in colliders)
+        {
+            Rigidbody2D hitRb = hit.GetComponent<Rigidbody2D>();
+            if (hitRb != null && hit.CompareTag("Player"))
+            {
+                hurt = true;
+            }
+        }
+
 
 
         //transform.localScale = new Vector3(5, 5, 5);

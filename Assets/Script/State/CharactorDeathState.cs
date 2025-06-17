@@ -14,6 +14,7 @@ public class CharactorDeathState : State
     {
         base.Entry();
         Debug.Log("进入死亡状态");
+        charator.movement.rb.velocity = Vector3.zero;//清除玩家速度
         charator.movement.rb.simulated = false; //禁用物理模拟
     }
 

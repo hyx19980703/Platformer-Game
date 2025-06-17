@@ -72,8 +72,8 @@ public class Charator : MonoBehaviour, Ideath
     public AirWithBomb airWithBomb { get; private set; }
     #endregion
 
-    private float ReturnTime = 1f;
-    private float ReturnTimer;
+    public float ReturnTime = 1f;
+    public float ReturnTimer;
 
     public CharactorMovement movement;
     void Awake()

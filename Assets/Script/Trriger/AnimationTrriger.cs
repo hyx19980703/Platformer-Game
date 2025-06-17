@@ -6,7 +6,6 @@ public class AnimationTrriger : MonoBehaviour
 {
     private Charator charator;
     private Animator animator;
-
     void Awake()
     {
         charator = GetComponentInParent<Charator>();
@@ -27,10 +26,9 @@ public class AnimationTrriger : MonoBehaviour
     public void RespwanStart()
     {
         charator.stateMachine.StateChange(charator.respwanState);
-
     }
-    
-        public void ReturnNormal()
+
+    public void ReturnNormal()
     {
         Debug.Log("复活");
         charator.stateMachine.StateChange(charator.IdleState);
