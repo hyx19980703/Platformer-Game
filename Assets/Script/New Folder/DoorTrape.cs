@@ -24,7 +24,7 @@ public class DoorTrape : MonoBehaviour
         collider2D = GetComponent<BoxCollider2D>();
         anim = GetComponentInChildren<Animator>();
 
-        originalColliderSize = collider2D.size; 
+        originalColliderSize = collider2D.size;
         originalColliderOffset = collider2D.offset;
         
          pressPositionID = Animator.StringToHash("pressPosition"); //获取变量名的哈希值，用户后续调用时提高性能
