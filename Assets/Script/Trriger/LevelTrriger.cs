@@ -18,4 +18,6 @@ public class LevelTrriger : MonoBehaviour
 
         SceneManager.LoadScene(nextLevelName);
     }
+
 }
+
