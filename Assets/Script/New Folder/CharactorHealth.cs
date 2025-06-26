@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
+//using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class CharactorHealth : MonoBehaviour
@@ -30,7 +30,7 @@ public class CharactorHealth : MonoBehaviour
     }
     public void Dead()
     {
-        if(player.ReturnTimer <= 0)
+        if (player.ReturnTimer <= 0)
         {
             player.ReturnTimer = player.ReturnTime;
             player.stateMachine.StateChange(player.deathState);

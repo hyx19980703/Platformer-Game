@@ -42,6 +42,7 @@ public class Explode : MonoBehaviour
         if(hurt)
         {
             EventManager.OtherEvent();
+            hurt = false;
         }
         //Debug.Log("手持时长：" + playerScript.holdBombTimer);
 
@@ -136,7 +137,7 @@ public class Explode : MonoBehaviour
             Animator animator = currentExplosion.GetComponent<Animator>();
             if (animator != null)
             {
-                animator.Play("boom400ppppp");
+                animator.Play("boom400ppppp",0);
 
                 // 计算动画时长并在结束时回收特效
                 float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;

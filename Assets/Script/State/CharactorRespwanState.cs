@@ -12,6 +12,7 @@ public class CharactorRespwanState : State
     public override void Entry()
     {
         base.Entry();
+        //GameObject.FindWithTag("Player").transform.position = GameManager.Instance.lastPosition; //玩家恢复正常位置
         charator.anim.SetLayerWeight(1, 0);
     }
 
