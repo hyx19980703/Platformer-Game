@@ -45,6 +45,12 @@ TagManager:
   - name: backGround
     uniqueID: 2051606627
     locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 2115169345
+    locked: 0
+  - name: Foreground
+    uniqueID: 2414459077
+    locked: 0
   - name: OneWayPlatfrom
     uniqueID: 2149671459
     locked: 0
