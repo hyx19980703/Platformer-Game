@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionEffect : MonoBehaviour
+public class ExplosionEffect : MonoBehaviour,IPooledObject
 {
     public float explosionDuration = 1.5f;
     private Animator explosionAnim;
     public Transform effectTransform;
     public GameObject boomPosition;
+    public string explosionTag = "ExplosionAirWave";
+    //public GameObject airwave;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,15 +23,24 @@ public class ExplosionEffect : MonoBehaviour
     {
         effectTransform = this.transform;
     }
-
-
-    public void HideEffect()
+    public void ExplosionAirWave()
     {
-        gameObject.SetActive(false);
+        ObjectPool.Instance.GetFromPool(this.explosionTag,transform.position,transform.rotation);
     }
     public void OnExplosionFinished()
     {
-        // ∂Øª≠Ω· ¯ ±÷¥––µƒ¬ﬂº≠
-        gameObject.SetActive(false); // Ω˚”√∂‘œÛ£®ªÿ ’÷¡∂‘œÛ≥ÿ£©
+        ObjectPool.Instance.ReturnToPool("ExplosionEffect", gameObject);
+    }
+    public void OnObjectSpawn()
+    {
+        if (explosionAnim != null)
+        {
+            explosionAnim.Play("boom400ppppp", 0);
+        }
+        //Debug.Log("Â∑≤ÈáçÁΩÆ");
+    }
+    public void OnObjectReturn()
+    {
+
     }
 }
