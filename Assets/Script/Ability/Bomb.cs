@@ -63,7 +63,7 @@ public class Bomb : MonoBehaviour,IPooledObject
     {
         bombActiveTime = holdingTime;
         remainingTime = bombFuse - holdingTime;
-        EventManager.GetDate -= CalculateRemainingTime;
+        EventManager.GetDate -= CalculateRemainingTime;  //保证只调用一次就取消订阅，避免remainingTime被丢炸弹动作不断重置。
     }
 
     public void OnObjectSpawn()

@@ -37,6 +37,7 @@ public class CharactorBombController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !isHoldingBomb)
         {
             TakeBombFromPool();
+            Debug.Log("拿出炸弹");
         }
 
         // 按住鼠标时调整炸弹位置（跟随手部）

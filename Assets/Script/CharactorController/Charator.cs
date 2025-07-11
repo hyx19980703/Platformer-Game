@@ -93,6 +93,7 @@ public class Charator : MonoBehaviour
         ReturnTimer -= Time.deltaTime;
         stateMachine.currentState.Update();
         Flip();
+        Debug.Log(Camera.main.targetTexture?.name);
     }
     public bool isGround => Physics2D.Raycast(GoundDeteced.position, Vector2.down, groundDistance, whatIsGround);  // 地面检测
     void OnDrawGizmos() // 地面检测调试
