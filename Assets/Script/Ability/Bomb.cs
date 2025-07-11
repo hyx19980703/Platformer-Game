@@ -33,6 +33,7 @@ public class Bomb : MonoBehaviour,IPooledObject
     // Update is called once per frame
     void Update()
     {
+
         if (remainingTime > 0)
         {
             remainingTime -= Time.deltaTime * 2f;
@@ -62,7 +63,7 @@ public class Bomb : MonoBehaviour,IPooledObject
     {
         bombActiveTime = holdingTime;
         remainingTime = bombFuse - holdingTime;
-
+        EventManager.GetDate -= CalculateRemainingTime;  //保证只调用一次就取消订阅，避免remainingTime被丢炸弹动作不断重置。
     }
 
     public void OnObjectSpawn()
@@ -77,7 +78,6 @@ public class Bomb : MonoBehaviour,IPooledObject
 
     public void OnObjectReturn()
     {
-        EventManager.GetDate -= CalculateRemainingTime;
         //EventManager.OnPlayerDeath -= RecycleBomb;
         rb.velocity = Vector2.zero;
         rb.gravityScale = 1f;
