@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mnue.unity
     guid: f01b417bcf9d0674aa1c54dc4bd90425
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/level0.unity
     guid: 1a6e1ea1c7e476b4a9983acfc03cb4a5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/level1.unity
     guid: 2b668a0d42e4c864e833d5fa53a5084d
   - enabled: 1
@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cave2.unity
     guid: 29687b8797bd38d45a709fd93d61105c
+  - enabled: 1
+    path: Assets/Scenes/Cave3.unity
+    guid: 8e8ea72d00a7b994b98f1da4bc1e3b74
   m_configObjects: {}
