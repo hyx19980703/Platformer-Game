@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ public class Menu : MonoBehaviour
     public Button exitButton;
 
     public SettingManager settingManager;
+
+    private SaveData saveData;
 
     void Start()
     {
@@ -33,20 +36,32 @@ public class Menu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("level0");
-
+        SceneManager.LoadScene(1);
+        settingManager.CloseSettings();
     }
-   public void OpenSettingsMenu()
+    public void OpenSettingsMenu()
     {
         if (settingManager != null)
-        { Debug.Log("尝试打开设置菜单，当前时间缩放: " + Time.timeScale);
+        {
+            Debug.Log("尝试打开设置菜单，当前时间缩放: " + Time.timeScale);
             settingManager.OpenSettings();
         }
     }
-   
-       public void QuitGame()
+
+    public void QuitGame()
     {
+        SaveSystem.SaveGame(GameManager.Instance.crrentLevel, GameManager.Instance.lastPosition);
         Application.Quit();
 
     }
+
+    public void ContiuneGame()
+    {
+        saveData = SaveSystem.loadGame();
+        Debug.Log("保存的关卡序号" + saveData.unlockedLevel);
+        settingManager.CloseSettings();
+        SceneManager.LoadScene(saveData.unlockedLevel);
+
+      //  GameManager.Instance.ResetPosition();
+     }
 }

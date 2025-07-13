@@ -49,6 +49,10 @@ public class GameManager : MonoBehaviour
         lastPosition = _lastPosition;
         crrentLevel = _currentLevel;
     }
+    public void ResetPosition()
+    {
+    GameObject.FindWithTag("Player").transform.position = lastPosition;
+    }
 
 
 
