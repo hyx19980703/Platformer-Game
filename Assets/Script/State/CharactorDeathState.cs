@@ -21,7 +21,7 @@ public class CharactorDeathState : State
     public override void Exit()
     {
         base.Exit();
-        GameObject.FindWithTag("Player").transform.position = GameManager.Instance.lastPosition; //玩家恢复正常位置
+        GameManager.Instance.ResetPosition(); //玩家恢复正常位置
         Debug.Log("回复活点");
         charator.movement.rb.simulated = true; //恢复物理模拟 
     }
