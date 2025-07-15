@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cave3.unity
     guid: 8e8ea72d00a7b994b98f1da4bc1e3b74
+  - enabled: 1
+    path: Assets/Scenes/Cave4(HaveDamaged).unity
+    guid: 53737f3c5c83069439d62251cb3aae29
   m_configObjects: {}

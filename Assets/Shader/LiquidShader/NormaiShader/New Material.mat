@@ -69,5 +69,5 @@ Material:
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0.9}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _WaterColor: {r: 0.1999999, g: 0.6, b: 1, a: 0}
+    - _WaterColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
