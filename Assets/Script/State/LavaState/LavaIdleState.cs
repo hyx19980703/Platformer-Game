@@ -27,6 +27,9 @@ public class LavaIdleState : LavaState
 
     private void StateChange()
     {
-        lavaController.lavaStateMachine.StateChange(lavaController.lavaBurstState);
+        if (Random.value <= lavaController.eruptionProbability)
+        {
+            lavaController.lavaStateMachine.StateChange(lavaController.lavaBurstState);
+        }
     }
 }

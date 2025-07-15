@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LavaController : MonoBehaviour
 {
+    [Range(0, 1f)]
+    public float eruptionProbability;
+
     public Animator lavaAnim;
     public LavaStateMachine lavaStateMachine;
     public LavaBurstState lavaBurstState { get; private set; }
