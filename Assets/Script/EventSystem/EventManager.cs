@@ -14,6 +14,8 @@ public class EventManager : MonoBehaviour
 
     public static event System.Action OnPlayerDeath;
 
+    public static event System.Action<float,Vector2> OnAirWaveSpread;
+
     public static event System.Action<float> GetDate;
 
     // 触发事件的方法
@@ -33,7 +35,10 @@ public class EventManager : MonoBehaviour
     {
         OnExplosion?.Invoke();
     }
-
+    public static void AirWaveEvent(float force , Vector2 airWaveCenter)
+    {
+        OnAirWaveSpread?.Invoke(force, airWaveCenter);
+    }
     public static void SentDate(float x)
     {
         GetDate?.Invoke(x);

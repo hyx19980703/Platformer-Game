@@ -12,12 +12,12 @@ public class CharactorThrowState : State
     public override void Update()
     {
         base.Update();
-        charator.stateMachine.StateChange(charator.IdleState);
-
+        //charator.stateMachine.StateChange(charator.IdleState);
     }
     public override void Entry()
     {
         base.Entry();
+        //Debug.Log("扔炸弹");
     }
 
     public override void Exit()

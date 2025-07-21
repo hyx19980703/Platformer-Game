@@ -29,6 +29,7 @@ public class CharactorBombController : MonoBehaviour
     {
         HandleBombInput();
         //Debug.Log("手持炸弹时间：" + holdingBombTimer);
+        //Debug.Log($"Trigger Active: {charactor.anim.GetBool("IsThrowed")}");
     }
 
     void HandleBombInput()
@@ -37,9 +38,8 @@ public class CharactorBombController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !isHoldingBomb)
         {
             TakeBombFromPool();
-            Debug.Log("拿出炸弹");
+            //Debug.Log("拿出炸弹");
         }
-
         // 按住鼠标时调整炸弹位置（跟随手部）
         if (isHoldingBomb && Input.GetMouseButton(0))
         {
@@ -55,7 +55,6 @@ public class CharactorBombController : MonoBehaviour
 
             }
         }
-
         // 松开鼠标时投掷炸弹
         if (Input.GetMouseButtonUp(0) && isHoldingBomb)
         {
@@ -110,8 +109,8 @@ public class CharactorBombController : MonoBehaviour
         #endregion
 
         #region 人物丢炸弹的方法以及进入扔炸弹状态
-        Rigidbody2D bombRb = currentBomb.GetComponent<Rigidbody2D>();
         charactor.stateMachine.StateChange(charactor.throwState);
+        Rigidbody2D bombRb = currentBomb.GetComponent<Rigidbody2D>();
         Vector2 thrownDir = (_mousePositon - charactor.rb.position).normalized;
         bombRb.velocity = thrownDir * throwSpeed;
         #endregion
@@ -143,5 +142,5 @@ public class CharactorBombController : MonoBehaviour
         //isHoldingBomb = false;
         //Debug.Log("炸弹是否重置"+isHoldingBomb);
     }
-    
+
 }

@@ -5,6 +5,7 @@ using UnityEditor.Rendering;
 //using UnityEditor.Scripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.TextCore.Text;
 
 public class Charator : MonoBehaviour
 {
@@ -65,19 +66,17 @@ public class Charator : MonoBehaviour
     public CharactorMovement movement;
     void Awake()
     {
-
         stateMachine = new StateMachine();
         IdleState = new CharactorIdleState(this, "Idle");
         runState = new CharactorRun(this, "Run");
         airState = new CharactorAirState(this, "Air");
         deathState = new CharactorDeathState(this, "Die");
         respwanState = new CharactorRespwanState(this, "Respawn");
-        throwState = new CharactorThrowState(this, "isThrowed");
+        throwState = new CharactorThrowState(this, "IsThrowed");
         //idleWithBomb = new IdleWithBomb(this, "IdleWithBomb");
         //runWithBomb = new RunWithBomb(this, "RunWithBomb");
         //airWithBomb = new AirWithBomb(this, "AirWithBomb");
     }
-
 
     void Start()
     {
@@ -93,7 +92,7 @@ public class Charator : MonoBehaviour
         ReturnTimer -= Time.deltaTime;
         stateMachine.currentState.Update();
         Flip();
-        Debug.Log(Camera.main.targetTexture?.name);
+        //Debug.Log(Camera.main.targetTexture?.name);
     }
     public bool isGround => Physics2D.Raycast(GoundDeteced.position, Vector2.down, groundDistance, whatIsGround);  // 地面检测
     void OnDrawGizmos() // 地面检测调试
