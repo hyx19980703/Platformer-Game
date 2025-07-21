@@ -51,6 +51,7 @@ public class ShockWaveManager : MonoBehaviour, IPooledObject
     {
         timer = 0f;
         CallShockWave(-0.1f, 1f);
+        EventManager.AirWaveEvent(10f, transform.position);
     }
     public void OnObjectReturn()
     {
