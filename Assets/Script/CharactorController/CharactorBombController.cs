@@ -114,6 +114,7 @@ public class CharactorBombController : MonoBehaviour
         charactor.stateMachine.StateChange(charactor.throwState);
         Vector2 thrownDir = (_mousePositon - charactor.rb.position).normalized;
         bombRb.velocity = thrownDir * throwSpeed;
+        SoundManager.instance.PlaySound("throw"); // 播放扔炸弹声音
         #endregion
 
         #region 丢炸弹时应用人物翻转

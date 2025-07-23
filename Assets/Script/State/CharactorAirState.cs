@@ -16,6 +16,7 @@ public class CharactorAirState : State
     public override void Exit()
     {
         base.Exit();
+       //     SoundManager.instance.PlaySound("land1");
 
     }
 
@@ -29,6 +30,7 @@ public class CharactorAirState : State
 
 
         if (charator.isGround)
-            charator.stateMachine.StateChange(charator.IdleState);
+        charator.stateMachine.StateChange(charator.IdleState);
+
     }
 }

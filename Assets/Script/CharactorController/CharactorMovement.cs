@@ -45,7 +45,8 @@ public class CharactorMovement : MonoBehaviour
     #region 跳跃方法
     public void Jump()
     {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        SoundManager.instance.PlaySound("jump");
     }
     #endregion
     #region 空中移动方法
