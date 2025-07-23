@@ -26,6 +26,7 @@ public class ExplosionEffect : MonoBehaviour,IPooledObject
     public void ExplosionAirWave()
     {
         ObjectPool.Instance.GetFromPool(this.explosionTag,transform.position,transform.rotation);
+        SoundManager.instance.PlaySound("explosion");
     }
     public void OnExplosionFinished()
     {

@@ -20,6 +20,7 @@ public class CheckPoint : MonoBehaviour
     {
         if (isActive == false && collision.CompareTag("Player"))
         {
+            SoundManager.instance.PlaySound("get_checkpoint");
 
             GameManager.Instance.SetCheckPoint(transform.position, currenLevel);
 

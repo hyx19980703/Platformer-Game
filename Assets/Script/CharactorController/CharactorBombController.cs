@@ -113,6 +113,7 @@ public class CharactorBombController : MonoBehaviour
         Rigidbody2D bombRb = currentBomb.GetComponent<Rigidbody2D>();
         Vector2 thrownDir = (_mousePositon - charactor.rb.position).normalized;
         bombRb.velocity = thrownDir * throwSpeed;
+        SoundManager.instance.PlaySound("throw"); // 播放扔炸弹声音
         #endregion
 
         #region 丢炸弹时应用人物翻转

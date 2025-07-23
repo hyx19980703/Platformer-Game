@@ -15,16 +15,22 @@ public class GameManager : MonoBehaviour
     public int crrentLevel;
 
     public Transform deathLine;
-    [SerializeField] private Charator charator;  
+    [SerializeField] private Charator charator;
 
 
     void Awake()
     {
-       // charator = GameObject.FindWithTag("player").GetComponent<Charator>();
+        // charator = GameObject.FindWithTag("player").GetComponent<Charator>();
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
         charactorHealth = 3;
 
+    }
+
+    void Start()
+    {
+        SoundManager.instance.PlayMusic();
+        
     }
 
     void Update()
