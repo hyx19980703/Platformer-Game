@@ -18,6 +18,7 @@ public class SettingManager : MonoBehaviour
 
     public bool isSettingOpen;
 
+
     void Start()
     {
         volumnSlider.value = AudioListener.volume;
@@ -64,12 +65,16 @@ public class SettingManager : MonoBehaviour
     {
         isSettingOpen = !isSettingOpen;
         settingPanel.SetActive(isSettingOpen);
-
+         GetComponent<Canvas>().enabled = true;
         if (isSettingOpen)
         {
             Time.timeScale = 0; //时间停止
         }
-        else Time.timeScale = 1; //恢复时间
+        else 
+        {
+            Time.timeScale = 1; //恢复时间
+            GetComponent<Canvas>().enabled = false;
+        }
     }
 
     public void CloseSettings()
