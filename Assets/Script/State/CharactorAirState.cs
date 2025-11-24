@@ -23,7 +23,6 @@ public class CharactorAirState : State
     public override void Update()
     {
         base.Update();
-        Debug.Log("空中状态");
         //charator.AirMove();
         charator.movement.Move();
         charator.anim.SetFloat("yVector", charator.movement.rb.velocity.y);

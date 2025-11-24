@@ -139,9 +139,9 @@ public class CharactorBombController : MonoBehaviour
     void RefreshHoldingState()//爆炸时重置持炸弹状态
     {
         holdingBombTimer = 0f;
-        //currentBomb = null;
-        //isHoldingBomb = false;
-        //Debug.Log("炸弹是否重置"+isHoldingBomb);
+        currentBomb = null;
+        isHoldingBomb = false;
+        Debug.Log("炸弹是否重置"+isHoldingBomb);
     }
 
 }

@@ -19,7 +19,7 @@ public class CheckPoint : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (isActive == false && collision.CompareTag("Player"))
-        {
+        {   Debug.Log("记忆点触发");
             SoundManager.instance.PlaySound("get_checkpoint");
 
             GameManager.Instance.SetCheckPoint(transform.position, currenLevel);

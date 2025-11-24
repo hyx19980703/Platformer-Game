@@ -70,6 +70,7 @@ public class Bomb : MonoBehaviour,IPooledObject
     {
         isExploded = false;
         EventManager.GetDate += CalculateRemainingTime;
+        UnityEngine.Debug.Log("取出炸弹");
         //EventManager.OnPlayerDeath += RecycleBomb;
         rb = GetComponent<Rigidbody2D>();
         transform.localScale = new Vector3(2f, 2f, 2f);
@@ -78,12 +79,12 @@ public class Bomb : MonoBehaviour,IPooledObject
 
     public void OnObjectReturn()
     {
-        //EventManager.OnPlayerDeath -= RecycleBomb;
+        EventManager.OnPlayerDeath -= RecycleBomb;
         rb.velocity = Vector2.zero;
         rb.gravityScale = 1f;
         rb.isKinematic = false;
         this.bombActiveTime = 0f;
-        //Debug.Log("是否重置：" + bombActiveTime);
+        UnityEngine.Debug.Log("是否重置：" + bombActiveTime);
     }
 
     private bool CheckNearGroundOrWall() => Physics2D.OverlapCircle(transform.position, detonationDistance, ground);

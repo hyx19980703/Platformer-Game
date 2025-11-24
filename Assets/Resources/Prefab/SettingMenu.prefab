@@ -1241,6 +1241,7 @@ MonoBehaviour:
   volumnSlider: {fileID: 6324705094636268696}
   qualityDropdown: {fileID: 8125585896362999094}
   isSettingOpen: 1
+  settingCanvas: {fileID: 3915099452621065864}
 --- !u!1 &3974003767310206547
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class Menu : MonoBehaviour
 
     public Button exitButton;
 
+    public Button levelSelect;       
+
     public SettingManager settingManager;
 
     private SaveData saveData;
@@ -31,6 +33,11 @@ public class Menu : MonoBehaviour
         if (exitButton != null)
         {
             exitButton.onClick.AddListener(QuitGame);
+        }
+
+        if(levelSelect !=null)
+        {
+            levelSelect.onClick.AddListener(SelectLevel);
         }
     }
 
@@ -64,4 +71,11 @@ public class Menu : MonoBehaviour
 
       //  GameManager.Instance.ResetPosition();
      }
+
+    public void SelectLevel()
+    {
+        Debug.Log("选择进入关卡选择界面");
+        SceneManager.LoadScene("LevelSelect");
+
+    }
 }

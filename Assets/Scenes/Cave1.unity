@@ -193232,6 +193232,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 60004234677444804, guid: 737428515d58c4e4b9066312aae5ed3f, type: 3}
+      propertyPath: currenLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 725535902144211827, guid: 737428515d58c4e4b9066312aae5ed3f, type: 3}
       propertyPath: m_Name
       value: CheckPoint1
@@ -193951,6 +193955,14 @@ PrefabInstance:
     - target: {fileID: 1223893489904511013, guid: bdd0ae95d8452a24d8d9047e85d1bac6, type: 3}
       propertyPath: m_DeadZoneHeight
       value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703258007774758856, guid: bdd0ae95d8452a24d8d9047e85d1bac6, type: 3}
+      propertyPath: far clip plane
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703258007774758856, guid: bdd0ae95d8452a24d8d9047e85d1bac6, type: 3}
+      propertyPath: orthographic size
+      value: 9.57
       objectReference: {fileID: 0}
     - target: {fileID: 2703258007774758856, guid: bdd0ae95d8452a24d8d9047e85d1bac6, type: 3}
       propertyPath: m_CullingMask.m_Bits
