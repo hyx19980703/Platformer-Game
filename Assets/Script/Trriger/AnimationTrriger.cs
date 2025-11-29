@@ -30,8 +30,8 @@ public class AnimationTrriger : MonoBehaviour
 
     public void ReturnNormal()
     {
-        Debug.Log("复活");
         charator.stateMachine.StateChange(charator.IdleState);
-
+        charator.anim.SetBool("IsThrowed",false);
+        Debug.Log("投掷结束");
     }
 }

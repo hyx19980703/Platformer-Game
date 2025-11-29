@@ -12,15 +12,25 @@ public class DoorTrape : MonoBehaviour
 
     private Vector2 originalColliderSize;     // 存储碰撞机的初始大小
     private Vector2 originalColliderOffset;     // 存储碰撞机的初始偏移
-
-
-
     private int pressPositionID;
 
     private float pressPosition;
 
+    [SerializeField] TrapTrriger trapTrriger;
+
+    [SerializeField] float delayTime; //延迟启动时间
+
+    [SerializeField] float duration; //持续时间
+    
+    private bool isTrriger;
+
+
+  
+
     void Start()
     {
+
+        
         collider2D = GetComponent<BoxCollider2D>();
         anim = GetComponentInChildren<Animator>();
 
@@ -33,8 +43,18 @@ public class DoorTrape : MonoBehaviour
     void Update() {
 
         pressPosition = anim.GetFloat(pressPositionID);  // 同 GetFloat("pressPosition") ,但性能更高
-        
         DoorColliderHight(pressPosition);
+        
+
+
+        if(trapTrriger.DetectPlayer()) //检测玩家
+        { 
+          //  StartCoroutine(DelayTrap(delayTime)); //延迟一定时间启动
+            StartCoroutine(TrapTimeControl(delayTime,duration));
+        }
+
+
+        
     }
 
     private void DoorColliderHight(float _pressPosition)
@@ -46,4 +66,16 @@ public class DoorTrape : MonoBehaviour
         originalColliderOffset.y-_pressPosition/2);
 
     }
+
+    IEnumerator TrapTimeControl(float _delayTime,float _duration)  //启动动画机
+    {
+        Debug.Log($"等待{_delayTime}秒,执行开启动画机");
+        yield return new WaitForSeconds(_delayTime);
+            anim.SetBool("isTrriger",true); //启动动画机
+        yield return new WaitForSeconds(_duration);
+            anim.SetBool("isTrriger",false); //终止动画
+        
+    }
+
+
 }

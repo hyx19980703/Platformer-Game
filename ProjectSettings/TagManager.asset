@@ -54,6 +54,9 @@ TagManager:
   - name: OneWayPlatfrom
     uniqueID: 2149671459
     locked: 0
+  - name: Trap
+    uniqueID: 3985233279
+    locked: 0
   - name: Ground
     uniqueID: 98611567
     locked: 0

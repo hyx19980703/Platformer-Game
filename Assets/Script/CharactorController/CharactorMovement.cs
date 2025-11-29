@@ -19,15 +19,6 @@ public class CharactorMovement : MonoBehaviour
     public float xInput;
     #endregion
     #region 初始化方法(暂未使用，已注释)
-    //public void Initialize()
-    //{
-    //    rb = GetComponent<Rigidbody2D>();
-    //    this.movingSpeed = 8f;
-    //    this.jumpForce = 10f;
-    //    this.maxJumpNum = 1;
-    //    this.airMoveFactor = 10f;
-    //    availableJump = maxJumpNum;
-    //}
     #endregion
     #region 移动方法
     public void Move()

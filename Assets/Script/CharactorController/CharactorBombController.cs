@@ -8,7 +8,6 @@ public class CharactorBombController : MonoBehaviour
    
     public Charator charactor;
     private GameObject currentBomb;
-    private bool isHoldingBomb = false;  // 是否持有炸弹，作用是补全逻辑，这样代码不容易出错，这里也能删除，但是建议保留
     private float holdingBombTimer = 0;
 
     [Header("References")]
@@ -17,6 +16,7 @@ public class CharactorBombController : MonoBehaviour
 
     [Header("Bomb Settings")]
     [SerializeField] private float bombHoldHeight = 0.5f; // 手持时炸弹的高度偏移
+    private bool isHoldingBomb;
 
     void Start()
     {
@@ -27,49 +27,62 @@ public class CharactorBombController : MonoBehaviour
 
     void Update()
     {
+        if(!charactor.anim.GetBool("IsThrowed")&&ObjectPool.Instance.GetAvailableObjectCount("Bomb")>=0)
         HandleBombInput();
-        //Debug.Log("手持炸弹时间：" + holdingBombTimer);
-        //Debug.Log($"Trigger Active: {charactor.anim.GetBool("IsThrowed")}");
+
+       Debug.Log("炸弹数量"+ObjectPool.Instance.GetAvailableObjectCount("Bomb")) ;
     }
 
     void HandleBombInput()
-    {
+    {   
         // 按下鼠标左键时拿出炸弹
-        if (Input.GetMouseButtonDown(0) && !isHoldingBomb)
+        if (GetMouseState()=="按下鼠标")
         {
             TakeBombFromPool();
             //Debug.Log("拿出炸弹");
         }
         // 按住鼠标时调整炸弹位置（跟随手部）
-        if (isHoldingBomb && Input.GetMouseButton(0))
+         if (GetMouseState()=="按住鼠标")
         {
+            isHoldingBomb = true;
             holdingBombTimer += Time.deltaTime;
-            charactor.anim.SetLayerWeight(1, 1);
             UpdateBombPosition();
             if (holdingBombTimer >= 1.5f)
-            {
+            {   
+                if (currentBomb==null) return;
                 EventManager.SentDate(holdingBombTimer);
                 currentBomb.SetActive(true);
-                isHoldingBomb = false;
                 holdingBombTimer = 0f;
 
             }
         }
         // 松开鼠标时投掷炸弹
-        if (Input.GetMouseButtonUp(0) && isHoldingBomb)
+        else if (GetMouseState()=="松开鼠标" )
         {
             EventManager.SentDate(holdingBombTimer);
-            charactor.anim.SetLayerWeight(1, 0);
+
             ThrowBomb(MousePositon.instance.mousePos);
         }
+
+        else
+        {
+            
+            isHoldingBomb = false;
+        }
+
     }
 
     void TakeBombFromPool()
     {
+        if(currentBomb!=null)
+        return;
         #region 从池中获取炸弹
         currentBomb = ObjectPool.Instance.GetFromPool("Bomb", transform.position, transform.rotation);
         currentBomb.transform.position = bombHoldPosition.position + Vector3.up * bombHoldHeight;
         currentBomb.transform.rotation = Quaternion.identity;
+        Debug.Log("获取炸弹");
+            charactor.anim.SetLayerWeight(1,1);
+
         #endregion
 
         #region 暂时不激活炸弹
@@ -134,6 +147,8 @@ public class CharactorBombController : MonoBehaviour
         #region 重置人物手持炸弹状态
         currentBomb = null;
         isHoldingBomb = false;
+        charactor.anim.SetLayerWeight(1,0);
+
         #endregion
     }
     void RefreshHoldingState()//爆炸时重置持炸弹状态
@@ -142,6 +157,17 @@ public class CharactorBombController : MonoBehaviour
         currentBomb = null;
         isHoldingBomb = false;
         Debug.Log("炸弹是否重置"+isHoldingBomb);
+    }
+
+    private string GetMouseState()
+    {
+       if( Input.GetMouseButtonDown(0))
+       return "按下鼠标";
+       else if(Input.GetMouseButton(0))
+       return "按住鼠标";
+       else if(Input.GetMouseButtonUp(0))
+       return "松开鼠标";
+       else return "0";
     }
 
 }

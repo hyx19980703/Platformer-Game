@@ -64,6 +64,7 @@ public class Charator : MonoBehaviour
     public float ReturnTimer;
 
     public CharactorMovement movement;
+
     void Awake()
     {
         stateMachine = new StateMachine();

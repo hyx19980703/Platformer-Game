@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelSelect.unity
     guid: 58fe17c9d2d496a439077068f44a9075
+  - enabled: 1
+    path: Assets/Scenes/EndingSence.unity
+    guid: d03c00b3fc155ba4b88092647752129a
   - enabled: 0
     path: Assets/Scenes/Cave4(HaveDamaged).unity
     guid: 53737f3c5c83069439d62251cb3aae29

@@ -18,11 +18,12 @@ public class State
     public virtual void Entry()
     {
         charator.anim.SetBool(animName, true);
+        
     }
 
     // Update is called once per frame
     public virtual void Update()
-    {
+    { 
 
     }
 

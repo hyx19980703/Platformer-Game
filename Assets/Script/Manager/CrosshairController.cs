@@ -4,39 +4,39 @@ using UnityEngine;
 
 public class CrosshairController : MonoBehaviour
 {
-    [Tooltip("×¼ÐÇÒÆ¶¯µÄÆ½»¬ÏµÊý")]
+    [Tooltip("×¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½Æ½ï¿½ï¿½Ïµï¿½ï¿½")]
     [Range(0f, 1f)]
     public float smoothSpeed = 0.125f;
 
-    [Tooltip("×¼ÐÇÓëÏà»úµÄZÖá¾àÀë")]
+    [Tooltip("×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½ï¿½ï¿½")]
     public float zOffset = 10f;
 
-    [Tooltip("×¼ÐÇ·Å´óÏµÊý")]
+    [Tooltip("×¼ï¿½Ç·Å´ï¿½Ïµï¿½ï¿½")]
     public float scale = 6f;
 
 
-    // ´æ´¢Ö÷Ïà»úÒýÓÃ
+    // ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private Camera mainCamera;
-    // ×¼ÐÇµÄÄ¿±êÎ»ÖÃ
+    // ×¼ï¿½Çµï¿½Ä¿ï¿½ï¿½Î»ï¿½ï¿½
     private Vector3 desiredPosition;
 
     private void Start()
     {
         transform.localScale = new Vector3(scale, scale, scale);
-        // Òþ²ØÄ¬ÈÏÊó±ê¹â±ê
+        // ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         //Cursor.visible = false;
-        // »ñÈ¡Ö÷Ïà»úÒýÓÃ
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         mainCamera = Camera.main;
     }
 
     private void Update()
     {
-        // ½«Êó±êÆÁÄ»×ø±ê×ª»»ÎªÊÀ½ç×ø±ê
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = zOffset;
         desiredPosition = mainCamera.ScreenToWorldPoint(mousePosition);
 
-        // Æ½»¬ÒÆ¶¯×¼ÐÇ
+        // Æ½ï¿½ï¿½ï¿½Æ¶ï¿½×¼ï¿½ï¿½
         transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -49,7 +49,7 @@ public class CrosshairController : MonoBehaviour
         }
     }
 
-    // ÏÔÊ¾»òÒþ²Ø×¼ÐÇµÄ·½·¨
+    // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¼ï¿½ÇµÄ·ï¿½ï¿½ï¿½
     public void SetCrosshairVisible(bool visible)
     {
         gameObject.SetActive(visible);

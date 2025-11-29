@@ -12,26 +12,16 @@ public class SettingManager : MonoBehaviour
     public Button closedButton;
     public Button retrunMenu;
 
-    public Slider volumnSlider;
 
-    public TMP_Dropdown qualityDropdown;
+
 
     public bool isSettingOpen;
 
 
     void Start()
     {
-        volumnSlider.value = AudioListener.volume;
-        if (qualityDropdown != null)
-        {
-            qualityDropdown.ClearOptions();
-            qualityDropdown.AddOptions(QualitySettings.names.ToList());
-            qualityDropdown.value = QualitySettings.GetQualityLevel();
-            qualityDropdown.onValueChanged.AddListener(SetQuality);
 
-        }
-        if (volumnSlider != null)
-            volumnSlider.onValueChanged.AddListener(SetVolume);
+
 
 
         settingPanel.SetActive(false);

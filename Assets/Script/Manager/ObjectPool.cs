@@ -15,7 +15,7 @@ public class ObjectPool : MonoBehaviour
     }
 
     public List<Pool> pools; // 多个对象池
-    private Dictionary<string, Queue<GameObject>> poolDictionary; // 对象池字典
+    public Dictionary<string, Queue<GameObject>> poolDictionary{get; set;}// 对象池字典
 
     void Awake()
     {
@@ -60,8 +60,7 @@ public class ObjectPool : MonoBehaviour
         {
             Debug.LogWarning($"池中没有对象了，请等待回收");
 
-            ExpandPool(tag, 5); // 扩展5个新实例
-            //return null;
+            ExpandPool(tag, 1); // 扩展5个新实例
         }
 
 
@@ -133,7 +132,19 @@ public class ObjectPool : MonoBehaviour
 
         poolDictionary[tag].Enqueue(objectToReturn);
     }
+
+    public int GetAvailableObjectCount(string tag)
+{
+    if (poolDictionary.ContainsKey(tag))
+    {
+        // 队列的 Count 就是当前可用的对象数量
+        return poolDictionary[tag].Count;
+    }
+    Debug.LogWarning($"没有找到标签为 {tag} 的对象池");
+    return -1;
 }
+}
+
 
 // 对象接口，用于初始化
 public interface IPooledObject
